@@ -18,6 +18,7 @@ title: Sample Title
 <p> this should display </p>
 {% else %}
 <p> this should not display </p>
+{% endif %}
 
 [Link to a file]({% link /e.pdf %})
 
