@@ -1,12 +1,12 @@
 --
 
-## Miles Liu
+# Miles Liu
 
 Hello! My name is Miles Liu. I recently graduated from Johns Hopkins University with a B.S. in Mechanical Engineering, and I am currently working towards a Master of Science in Engineering in Robotics at the [JHU Laboratory for Computational and Sensory Robotics](https://lcsr.jhu.edu/), expecting to graduate in 2022.
 
 I concurrently work as an Engineering Associate with the amazing team at the startup company [ClearMask, LLC](https://www.theclearmask.com/), where my main responsibilities include development, testing, and maintenance of new products, external webpages, and internal digital platforms.
 
-# Here is my public project portfolio:
+## Here is my public project portfolio:
 
 * Autonomous Vehicle Testing Asset (VTA)
   * Mechanical Engineering Senior Design Project, Sponsored by [Oceaneering International, Inc.](https://www.oceaneering.com/)
@@ -23,6 +23,6 @@ I concurrently work as an Engineering Associate with the amazing team at the sta
 
 Beyond academics, I am also involved in JHU’s Chinese Students Association, where I served as the club’s co-president from 2020-2021 and as committee directors from 2018-2020. I am also involved in the [THREAD](https://www.thread.org/) mentoring program as Head of Family since 2018.
 
-# Contact Info
+## Contact Info
 
 [mliu59@jhu.edu](mailto:mliu59@jhu.edu), 626-200-3776
