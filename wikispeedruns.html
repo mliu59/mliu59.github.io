@@ -1,16 +1,106 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Miles Liu - Wikipedia Speedruns</title>
-    <link rel= "stylesheet" type= "text/css" href="https://mliu59.github.io/main.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Miles Liu">
-</head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://mliu59.github.io/main.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Miles Liu" />
+  </head>
 
-<body>
+  <body>
+    <h1><a href="https://wikispeedruns.com">Wikipedia Speedruns</a></h1>
 
+    <section>
+      <p>
+        Wikipedia is a core informational service that alot of people rely on to
+        gather basic information on various topics. The entire website is also
+        surprisingly connected, with there being almost certainly at least a few
+        paths between any two given articles, provided that they're not
+        extremely obscure. After discovering that it is easy to end up going
+        into deep dives of Wikipedia's articles, reading page after page, my
+        friends and I decided to hold a number of online tournaments between
+        ourselves.
+      </p>
+      <p>
+        The game proved to be very engaging and entertaining not only to the
+        contestants of any given matchup, but also to spectators. The game also
+        serves as a fun way to quiz and test players' breadth of knowledge, much
+        like a trivia game would.
+      </p>
+      <p>
+        Holding these tournaments manually limits the game to only a handful a
+        people at the same time, so my friend
+        <a href="https://danqian.net/">Daniel Qian</a> and I decided to try and
+        build our own online version of the game that can be infinitely
+        scalable, potentially gathering hundreds of players in the future.
+      </p>
+      <p>
+        The project is also inspired by similar platforms such as Alex
+        Clemesha's <a href="https://www.thewikigame.com/">WikiGame</a>.
+      </p>
+      <p>
+        As a summary of the game, the core objective is to navigate from one
+        wikipedia page to another in as few clicks/little time as possible by
+        only clicking on links to other wikipedia articles. Some example prompts
+        can be found on the game home page.
+      </p>
+      <p>
+        Currently, the game indirectly hosts Wikipedia articles through the
+        Wikipedia API, HTML, and JavaScript through the Flask web framework.
+        Backend processes such as prompt history and leaderboards are powered by SQL.
+      </p>
+    </section>
 
-</body>
+    <section>
+      <p>
+        On a core gameplay level, through play-testing, we eventually determined that the game was not
+        challenging enough. While increasing the specificity and niche-ness of
+        the articles involved does increase the difficulty, on many occasions it
+        rendered some prompts unplayable. For that reason, we decided to cut out
+        a number of sections on Wikipedia pages that allowed for quick routes
+        within similar subjects, such as disambiguation pages, category pages,
+        See also sections, just to name a few, in order to make navigating the wikipedia articles more challenging, since players can then only rely on the text context of the articles. 
+      </p>
+      <p>
+          As of May 2021, we were able to get a solid MVP of the website running. Players can choose specific prompts to play, and after they've finished, they can submit their results to an arcade style leaderboard.
+      </p>
+    </section>
 
+    <section>
+        <p>
+          This project is particularly exciting because of the endless possibilities for features that can be implemented. Here are some core features that we are planning on implementing soon:
+          <ul>
+              <li>
+                  <strong>A player account login system</strong>. Having this implemented can introduce another set of possibilities for game features, such as:
+                  <ul>
+                      <li>Player ranking system (Similar to Chess ELO and competitive online gaming ranking systems), and subsequently provide players incentive to practice and get better</li>
+                      <li>Player history tracking, to make sure players don't flood the leaderboard with repeated tries of the same prompt</li>
+                      <li>Player Achievements</li>
+                      <li>Offline tournaments</li>
+                  </ul>
+              </li>
+              <li>
+                  <strong>Synced</strong> (or pseudo-synced) <strong>live versus matches</strong>. The current game is not synchronized between players in that players can play and submit scores any time they would like. Having live versus matches implemented can be great for small scale tournaments or for hosting in-person events/competitions. 
+
+              </li>
+              <li>
+                  <strong>Random prompt generator</strong>. Currently the game requires administrators to manually put in prompts. In the future we would like to have a system that can automatically generate prompts whenever queried.
+              </li>
+                  <strong>Article Categorization</strong>. It would be really cool to be able to categorize articles. Then we would be able to have the random prompt generator generate specifically themed prompts for events. With the user account system, the categorizer would also be able to provide user insight information on which subjects/topics their strengths and weaknesses lie depending on their past performances.
+              <li>
+                  <strong>Path finding web crawler</strong>. Along with the prompt generator, the crawler would preemptively determine whether or not a prompt is even possible, and if it is, what the shortest path(s) between the articles are. This is actually a much trickier problem to solve, given that we'd implemented rules to disallow certain sections, so whatever implementation method we decide to use will need to also be able to filter out those disallowed links.
+              </li>
+              <li>
+                  <strong>General UI improvements.</strong> 
+              </li>
+          </ul>
+        </p>
+      </section>
+
+      <p>Stay tuned for more! Try out some of our prompts while you're here. <a href="https://wikispeedruns.com/random">Try your hand at a random prompt</a></p>
+  </body>
 </html>
