@@ -7,7 +7,7 @@ I concurrently work as an Engineering Associate with the amazing team at the sta
 
 ## Here is my public project portfolio:
 
-#### [Autonomous Vehicle Testing Asset](https://mliu59.github.io/ocean21/) (VTA)
+#### [Autonomous Vehicle Testing Asset](https://mliu59.github.io/ocean21.html/) (VTA)
 
 * Mechanical Engineering Senior Design Project, Sponsored by [Oceaneering International, Inc.](https://www.oceaneering.com/)
 * An autonomous surface vehicle that serves as a tether management system to mitigate tether tension for Oceaneering’s small subsea vehicles during vehicle testing and deployment.
