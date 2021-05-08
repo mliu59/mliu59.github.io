@@ -1,0 +1,7 @@
+layout: page
+title: "OCEAN21 Senior Design Project - VTA"
+permalink: /ocean21/
+
+# OCEAN21 MESD Project - Vehicle Testing Asset
+
+test
