@@ -53,7 +53,6 @@
         Wikipedia API, HTML, and JavaScript through the Flask web framework.
         Backend processes such as prompt history and leaderboards are powered by a SQL database.
       </p>
-      <br><br>
       <p>Stay tuned for more! Try out some of our prompts while you're here. <a href="https://wikispeedruns.com/random">Try your hand at a random prompt</a></p>
     </section>
 
@@ -94,7 +93,9 @@
               <li>
                   <strong>Random prompt generator</strong>. Currently the game require administrators to manually put in prompts. In the future we would like to have a system that can automatically generate prompts whenever queried.
               </li>
+              <li>
                   <strong>Article Categorization</strong>. It would be really cool to be able to categorize articles. Then we would be able to have the random prompt generator generate specifically themed prompts for events. With the user account system, the categorizer would also be able to provide user insight information on which subjects/topics their strengths and weaknesses lie depending on their past performances.
+              </li>
               <li>
                   <strong>Path finding web crawler</strong>. Along with the prompt generator, the crawler would preemptively determine whether or not a prompt is even possible, and if it is, what the shortest path(s) between the articles are. This is actually a much trickier problem to solve, given that we'd implemented rules to disallow certain sections, so whatever implementation method we decide to use will need to also be able to filter out those disallowed links.
               </li>
