@@ -1,5 +1,5 @@
 body {
-    width: 80%;
+    width: 70%;
     max-width: 1500px !important;
     margin: 40px auto !important;
     font-size: 18px; 
@@ -8,4 +8,9 @@ body {
 li {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+section {
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
