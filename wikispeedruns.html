@@ -16,7 +16,7 @@
 
     <section>
       <p>
-        Wikipedia is a core informational service that alot of people rely on to
+        Wikipedia is a core informational service that a lot of people rely on to
         gather basic information on various topics. The entire website is also
         surprisingly connected, with there being almost certainly at least a few
         paths between any two given articles, provided that they're not
@@ -49,14 +49,18 @@
         can be found on the game home page.
       </p>
       <p>
-        Currently, the game indirectly hosts Wikipedia articles through the
+        Currently, the game indirectly hosts Wikipedia articles using the
         Wikipedia API, HTML, and JavaScript through the Flask web framework.
-        Backend processes such as prompt history and leaderboards are powered by SQL.
+        Backend processes such as prompt history and leaderboards are powered by a SQL database.
       </p>
     </section>
 
+    <h2>Unofficial Dev Blog</h2>
+    
+    
     <section>
-      <p>
+        <h3>May 8th, 2021 - Recapping previous work and todo list</h3>
+    <p>
         On a core gameplay level, through play-testing, we eventually determined that the game was not
         challenging enough. While increasing the specificity and niche-ness of
         the articles involved does increase the difficulty, on many occasions it
@@ -79,8 +83,7 @@
                   <ul>
                       <li>Player ranking system (Similar to Chess ELO and competitive online gaming ranking systems), and subsequently provide players incentive to practice and get better</li>
                       <li>Player history tracking, to make sure players don't flood the leaderboard with repeated tries of the same prompt</li>
-                      <li>Player Achievements</li>
-                      <li>Offline tournaments</li>
+                      <li>Player Achievements, to reward players with their progress and provide incentive for them to "achievement hunt"</li>
                   </ul>
               </li>
               <li>
@@ -88,7 +91,7 @@
 
               </li>
               <li>
-                  <strong>Random prompt generator</strong>. Currently the game requires administrators to manually put in prompts. In the future we would like to have a system that can automatically generate prompts whenever queried.
+                  <strong>Random prompt generator</strong>. Currently the game require administrators to manually put in prompts. In the future we would like to have a system that can automatically generate prompts whenever queried.
               </li>
                   <strong>Article Categorization</strong>. It would be really cool to be able to categorize articles. Then we would be able to have the random prompt generator generate specifically themed prompts for events. With the user account system, the categorizer would also be able to provide user insight information on which subjects/topics their strengths and weaknesses lie depending on their past performances.
               <li>
