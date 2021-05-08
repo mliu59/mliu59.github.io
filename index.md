@@ -1,7 +1,4 @@
 --
-layout: page
-title: "Home"
---
 
 ## Miles Liu
 
@@ -9,7 +6,7 @@ Hello! My name is Miles Liu. I recently graduated from Johns Hopkins University 
 
 I concurrently work as an Engineering Associate with the amazing team at the startup company [ClearMask, LLC](https://www.theclearmask.com/), where my main responsibilities include development, testing, and maintenance of new products, external webpages, and internal digital platforms.
 
-Here is my public project portfolio:
+# Here is my public project portfolio:
 
 * Autonomous Vehicle Testing Asset (VTA)
   * Mechanical Engineering Senior Design Project, Sponsored by [Oceaneering International, Inc.](https://www.oceaneering.com/)
@@ -25,3 +22,7 @@ Here is my public project portfolio:
   * Inspired by a number of fun online tournaments we’ve held over a few months, Wikipedia Speedruns is a web-page game where players try to get from one wikipedia page to another as fast as possible using only links in the article. The project is currently in a MVP state, and there are a number of big game features we are aiming to add soon.
 
 Beyond academics, I am also involved in JHU’s Chinese Students Association, where I served as the club’s co-president from 2020-2021 and as committee directors from 2018-2020. I am also involved in the [THREAD](https://www.thread.org/) mentoring program as Head of Family since 2018.
+
+# Contact Info
+
+[mliu59@jhu.edu](mailto:mliu59@jhu.edu), 626-200-3776
