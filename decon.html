@@ -24,15 +24,59 @@
         between fixed ROIs, identifies target disinfection with computer vision
         , and executes a disinfectant spray and UVC radiation disinfection
         routine on fixed objects (doorknobs and light-switches), specifically targeting 
-        Methicilin-resistant Staphylococcus aureus (MRSA), which is one of the largest contributors to HAIs.
+        Methicilin-resistant Staphylococcus aureus (MRSA), which is one of the largest 
+        contributors to HAIs in the US.
       </p>
       <p>
-        From left to right, our multidisciplinary team consists of Charbel Rizk (instructor), Matt Chea, Neel Kovelamudi, me (Miles Liu), Thomas DiSorbo, Alia Nasrallah, and Nafisa Ali Amir (not pictured).
+        From left to right, our multidisciplinary team consists of Charbel Rizk (instructor), 
+        Matt Chea, Neel Kovelamudi, me (Miles Liu), Thomas DiSorbo, Alia Nasrallah, 
+        and Nafisa Ali Amir (not pictured).
       </p>
-      <a href="https://engineering.jhu.edu/lindt/">
-        <img src="https://drive.google.com/file/d/18mY-MXyvf9-8f5yAcK91VoM1xrH-4PTP/view?usp=sharing" width="500">
-      </a>
-      
+      <div>
+        <a href="https://engineering.jhu.edu/lindt/">
+            <img src="https://drive.google.com/file/d/18mY-MXyvf9-8f5yAcK91VoM1xrH-4PTP/view?usp=sharing" width="500">
+        </a>
+      </div>
+
+    </section>
+
+    <section>
+        <p>
+            The robotic system is mainly divided into three main operational subsystems: 
+            <strong>Navigation, Detection, Disinfection. </strong>Robot operation is implemented through 
+            ROS.
+        </p>
+        <p>
+            For <strong>Navigation</strong>, the robot relies on a LiDAR and SLAM to create a local map, and uses the Dynamic Window Approach
+            to path find and navigate in a dynamic environment like that of a healthcare facility with average foot traffic 
+            and frequent obstacles. We used a <a href="https://www.robotis.us/turtlebot-3-waffle-pi/">Robotis TurtleBot3 Waffle</a>
+            as our base robot chassis.
+        </p>
+        <div>
+            <img src="https://drive.google.com/file/d/1j3gweUWaRLsCZmy_VOKtmmSCiUiZUsZs/view?usp=sharing" width="400">
+        </div>
+        <p>
+            For <strong>Detection</strong>, we want the robot to be able to identify, categorize, and localize disinfection targets 
+            (in our prototype setup: doorknobs and light-switches) within a specified ROI, after the robot has navigated to the general area. 
+            It will also need to recognize objects that are NOT to be 
+            subjected to disinfection, such as human faces (would not want to flash high concentration UVC light at someone's face) 
+            and power outlets (due to the liquid disinfectant), for the robot to actively avoid, regardless of whether or not a target is nearby. 
+        </p>
+        <p>
+            To do this, we used a Zed stereo camera for object detection and localization. 
+            A Faster RCNN algorithm trained on the Open Images dataset from Google, augmented with our own target images, 
+            is used to recognize and categorize objects. The stereo camera can then triangulate the object's coordinates with respect to robot frame. 
+            That is then fed to the navigation algorithm or the robot arm to position the disinfection apparatus for a controlled disinfection on only
+            the target object.
+        </p>
+        <div>
+            <img src="https://drive.google.com/file/d/1rgXaJr5VwkVBLxb560_K5QAkFI4SLl5f/view?usp=sharing" width="400">
+        </div>
+
+        <p>
+            
+        </p>
+
     </section>
   </body>
 </html>
