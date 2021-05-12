@@ -3,6 +3,7 @@ body {
     max-width: 1500px !important;
     margin: 40px auto !important;
     font-size: 18px; 
+    position: relative;
 }
 
 li {
@@ -13,4 +14,13 @@ li {
 section {
     margin-top: 25px;
     margin-bottom: 50px;
+}
+
+.inlineLeft, .inlineRight {
+    position: absolute;
+    display: inline;
+}
+
+.inlineRight {
+    right: 0;
 }
