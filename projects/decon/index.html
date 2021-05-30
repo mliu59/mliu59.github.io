@@ -2,66 +2,118 @@
 <html>
   <head>
     <title>Miles Liu - DECON Autonomous Disinfection Unit</title>
+    
+    
+    <!--<link rel= "stylesheet" type= "text/css" href="https://mliu59.github.io/main.css">-->
+
+
     <link
       rel="stylesheet"
       type="text/css"
       href="https://mliu59.github.io/main.css"
     />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Miles Liu" />
-  </head>
+    
+    <script src="https://mliu59.github.io/js/header.js"></script>
+    
 
-  <body>
-    <h1>DECON Autonomous Disinfection Unit</h1>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Miles Liu">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+
+
+
+<body>
+
+    <header>
+          <div class="sitenav" id="sitenav">
+          </div>
+          <script>
+              generateHeader(title = "DECON Autonomous Disinfection Unit");
+          </script>
+  </header>
+    
+    
+    <div class="main">
     <section>
+      <div class="imgright">
+        <img
+          src="https://mliu59.github.io/projects/decon/robot.png"
+          width="170"
+        />
+      </div>
       <p>
         For the DECON project, our goal is to create an autonomous robotic
-        platform that can safely disinfect high risk areas/items in public
-        spaces of healthcare facilities , such as doorknobs, handlebars,
-        light-switches, etc., to mitigate the risk of Healthcare Associated
-        Infections (HAIs), all without disrupting regular healthcare workflow
-        and traffic. To achieve this, our team designed a robotic platform
+        platform that can safely disinfect high risk areas/items in healthcare facilities to mitigate the risk of Healthcare Associated
+        Infections (HAIs), without disrupting regular healthcare workflow. To achieve this, our team designed a 
         proof-of-concept prototype that autonomously navigates itself between
         fixed ROIs, identifies target disinfection with computer vision , and
         executes a disinfectant spray and UVC radiation disinfection routine on
-        fixed objects (doorknobs and light-switches), specifically targeting
-        Methicilin-resistant Staphylococcus aureus (MRSA), which is one of the
-        largest contributors to HAIs in the US. The project is a course project
+        fixed objects (doorknobs and light-switches). The project is a course project
         for Leading Innovation Design Team (taught by Dr. Charbel Rizk), and was
         sponsored by the
         <a href="https://www.jhuapl.edu/"
           >Johns Hopkins University Applied Physics Laboratory</a
         >.
       </p>
-      <p>
-        From left to right, our multidisciplinary team consists of Charbel Rizk
-        (course instructor), Matt Chea, Neel Kovelamudi, me (Miles Liu), Thomas
-        DiSorbo, Alia Nasrallah, Nafisa Ali Amir (not pictured), and Joshua Liu
-        (not pictured).
-      </p>
+      <!--
       <div>
+        <p>
+          From left to right, our multidisciplinary team consists of Charbel Rizk
+          (course instructor), Matt Chea, Neel Kovelamudi, me (Miles Liu), Thomas
+          DiSorbo, Alia Nasrallah, Nafisa Ali Amir (not pictured), and Joshua Liu
+          (not pictured).
+        </p>
         <a href="https://engineering.jhu.edu/lindt/">
           <img
             src="https://mliu59.github.io/decon/team.jpg"
             width="400"
-            class="inlineRight"
           />
         </a>
       </div>
+      -->
+      
+      
+
+      <p>
+        At the time of participation, I was a Mechanical Engineering
+        undergraduate junior just starting a robotics curriculum, so I had
+        limited opportunities to contribute efficiently to some of the robot
+        subsystems. However, looking back, the DECON project was an amazing
+        learning experience for me. As my first year long robotics design
+        project, being able to contribute to a sponsored real-world and highly
+        relevant project has
+        taught me great deals in communication, project time & resource
+        management, and working in highly multidisciplinary teams. On top of
+        those, I was able to learn first hand the applications of various
+        robotic sensors & actuators (LiDAR, stereo cameras, photometers, etc.),
+        navigational and computational strategies (SLAM localization, DWA path
+        planning, Computer vision and processing, etc.), and core robotic system
+        components (ROS, power distribution, etc.).
+      </p>
     </section>
 
-    <section>
-      <img
-        src="https://mliu59.github.io/decon/robot.png"
-        width="300"
-        class="inlineRight"
-      />
+    <button class="accordion"><h1 class="acc">Technical Details</h1></button>
+
+    <section class="panel"> 
+      
       <p>
         The robotic system is mainly divided into three main operational
         subsystems:
         <strong>Navigation, Detection, Disinfection. </strong>Robot operation is
         implemented through ROS.
       </p>
+
+      <div class="imgright">
+        <img
+          src="https://mliu59.github.io/projects/decon/DWA.png"
+          width="200"
+        />
+      </div>
       <p>
         For <strong>Navigation</strong>, the robot relies on a LiDAR and SLAM to
         create a local map, and uses the Dynamic Window Approach to path find
@@ -72,13 +124,9 @@
         >
         as our base robot chassis.
       </p>
-      <div>
-        <img
-          src="https://mliu59.github.io/decon/DWA.png"
-          width="400"
-          class="inlineRight"
-        />
-      </div>
+      
+      
+
       <p>
         For <strong>Detection</strong>, we want the robot to be able to
         identify, categorize, and localize disinfection targets (in our
@@ -90,6 +138,14 @@
         UVC light at someone's face) and power outlets (due to the liquid
         disinfectant spray),
       </p>
+
+      <div class="imgright">
+        <img
+          src="https://mliu59.github.io/projects/decon/objectdetection.png"
+          width="400"
+        />
+      </div>
+
       <p>
         To do this, we used a Zed stereo camera for object detection and
         localization. A Faster RCNN algorithm trained on the Open Images dataset
@@ -102,14 +158,7 @@
         switched to an Nvidia Jetson TX2 to increase computational power for the
         robot.
       </p>
-      <div>
-        <img
-          src="https://mliu59.github.io/decon/objectdetection.png"
-          width="400"
-          class="inlineRight"
-        />
-      </div>
-
+      
       <p>
         For <strong>Disinfection</strong>, our goal is to deliver disinfection
         to the target object/area with high efficacy and low risk to nearby
@@ -123,6 +172,7 @@
         our LED array. The disinfectant spray is delivered through a peristaltic
         pump and an electronically controlled sprayer.
       </p>
+      
       <p>
         To ensure safety, the entire disinfection system is contained within a
         disinfection cone, mounted on a 5-DoF robotic arm. When the disinfection
@@ -135,10 +185,9 @@
         positioned around the cone. The cone itself is reflective on the inside
         to maximize the amount of UVC delivered to the object surface.
       </p>
-    </section>
-    <section>
+
       <p>
-        Nearing the end of the project academic year in March during the
+        Nearing the end of the project academic year during the
         integration stages of the prototype, the COVID pandemic forced the team
         to work remotely on the project, which significantly hindered progress.
         Ultimately, we were able to develop a prototype that was able to
@@ -146,28 +195,15 @@
         objects, and perform the disinfection routine. With more time, we would
         have wanted to further improve the robot's navigation efficiency,
         increase UVC disinfection efficacy, and make our solution more robust
-        for dynamic environments. We were also hoping to conduct controlled
-        testing for the system in actual healthcare facilities, but was not able
-        to do so with the time and pandemic constraints.
+        for dynamic environments through controlled deployment testing.
       </p>
-      <p>
-        At the time of participation, I was a Mechanical Engineering
-        undergraduate junior just starting a robotics curriculum, so I had
-        limited opportunities to contribute efficiently to some of the robot
-        subsystems, such as the computer vision and SLAM navigational
-        components, as they were spearheaded by more advanced and specialized
-        team members. However, looking back, the DECON project was an amazing
-        learning experience for me. As my first year long robotics design
-        project, being able to contribute to a sponsored real-world and highly
-        relevant (almost ironically perfectly timed with COVID-19) project has
-        taught me great deals in communication, project time & resource
-        management, and working in highly multidisciplinary teams. On top of
-        those, I was able to learn first hand the applications of various
-        robotic sensors & actuators (LiDAR, stereo cameras, photometers, etc.),
-        navigational and computational strategies (SLAM localization, DWA path
-        planning, Computer vision and processing, etc.), and core robotic system
-        components (ROS, power distribution, etc.).
-      </p>
+
     </section>
+    </div>
+    <footer>
+  </footer>
+    
   </body>
+  <script src="https://mliu59.github.io/js/subpage.js"></script>
+  <!--<script src="https://mliu59.github.io/subpage.js"></script>-->
 </html>

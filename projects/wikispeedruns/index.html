@@ -2,28 +2,68 @@
 <html>
   <head>
     <title>Miles Liu - Wikipedia Speedruns</title>
+    
+    
+    <!--<link rel= "stylesheet" type= "text/css" href="https://mliu59.github.io/main.css">-->
+
+
     <link
       rel="stylesheet"
       type="text/css"
       href="https://mliu59.github.io/main.css"
     />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Miles Liu" />
-  </head>
+    <script src="https://mliu59.github.io/js/header.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Miles Liu">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+</head>
 
-  <body>
-    <h1><a href="https://wikispeedruns.com">Wikipedia Speedruns</a></h1>
+
+
+<body>
+  <header>
+      <div class="sitenav" id="sitenav">
+      </div>
+      <script>
+          generateHeader(title = "Wikipedia Speedruns");
+      </script>
+</header>
+
+    <div class="main">
 
     <section>
+
+      <div class="imgright">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1280px-Wikipedia-logo-v2-en.svg.png"
+          width="250"
+        />
+      </div>
+
+
+      <p>
+      <a  href="https://wikispeedruns.com">
+        Link to Game
+      </a>
+    </p>
+      
       <p>
         Wikipedia is a core informational service that a lot of people rely on to
         gather basic information on various topics. The entire website is also
         surprisingly connected, with there being almost certainly at least a few
-        paths between any two given articles, provided that they're not
-        extremely obscure. After discovering that it is easy to end up going
-        into deep dives of Wikipedia's articles, reading page after page, my
-        friends and I decided to hold a number of online tournaments between
+        paths between any two given articles. My
+        friends and I decided to hold a number of online wikipedia speedrunning tournaments between
         ourselves.
+      </p>
+      <p>
+        As a summary of the game, the core objective is to navigate from one
+        wikipedia page to another in as few clicks/little time as possible by
+        only clicking on links to other wikipedia articles. Some example prompts
+        can be found on the game home page.
       </p>
       <p>
         The game proved to be very engaging and entertaining not only to the
@@ -43,12 +83,6 @@
         Clemesha's <a href="https://www.thewikigame.com/">WikiGame</a>.
       </p>
       <p>
-        As a summary of the game, the core objective is to navigate from one
-        wikipedia page to another in as few clicks/little time as possible by
-        only clicking on links to other wikipedia articles. Some example prompts
-        can be found on the game home page.
-      </p>
-      <p>
         Currently, the game indirectly hosts Wikipedia articles using the
         Wikipedia API, HTML, and JavaScript through the Flask web framework.
         Backend processes such as prompt history and leaderboards are powered by a SQL database.
@@ -56,8 +90,9 @@
       <p>Stay tuned for more! Try out some of our prompts while you're here. <a href="https://wikispeedruns.com/random">Try your hand at a random prompt</a></p>
     </section>
     
-    <section>
-        <h3>May 8th, 2021 - Recapping previous work and todo list</h3>
+    <button class="accordion"><h1 class="acc">May 8th, 2021 Update</h1></button>
+    <section class="panel">
+      <h3>Recapping previous work and todo list</h3>
       <p>
         On a core gameplay level, through previously play-testing and manual tournaments, we eventually determined that the game was not
         challenging enough. While increasing the specificity and niche-ness of
@@ -95,12 +130,20 @@
                   <strong>Path finding web crawler</strong>. Along with the prompt generator, the crawler would preemptively determine whether or not a prompt is even possible, and if it is, what the shortest path(s) between the articles are. This is actually a much trickier problem to solve, given that we'd implemented rules to disallow certain sections, so whatever implementation method we decide to use will need to also be able to filter out those disallowed links.
               </li>
               <li>
+                <strong>Cool visualization stuff for showing everyone's path in a prompt.</strong> 
+              </li>
+              <li>
                   <strong>General UI improvements.</strong> 
               </li>
           </ul>
         </p>
       </section>
-
-      
+    </div>
+    
+    <footer>
+  </footer>
+  
+    <script src="https://mliu59.github.io/js/subpage.js"></script>
+  <!--<script src="https://mliu59.github.io/subpage.js"></script>-->
   </body>
 </html>

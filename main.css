@@ -1,9 +1,37 @@
+/*
+Red Highlight: #B73225
+Blue Minded: #004E7C
+Maroon 6: #591COB
+Grey Water: #5C5F58
+Lighter Grey: #DCE1E3
+*/
+
+a {
+    text-decoration: underline;
+    color: #004E7C;
+    font-weight: bold;
+}
+
 body {
-    width: 60%;
+    position: relative;
+    margin: 0 0 0 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #F0F0F0;
+    text-align: justify;
+    text-justify: inter-word;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;    /* Footer height */
+  }
+
+.main {
+    width: 55%;
     max-width: 1500px !important;
     margin: 40px auto !important;
-    font-size: 18px; 
-    position: relative;
+    margin-top: 20px !important;
+    font-size: 22px;
 }
 
 li {
@@ -13,14 +41,335 @@ li {
 
 section {
     margin-top: 25px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
-.inlineLeft, .inlineRight {
+header {
+    position: sticky;
+    top: 0;
+    background: white;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 30px;
+}
+
+footer {
+    
     position: absolute;
-    display: inline-block;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;  
 }
 
-.inlineRight {
-    right: 0;
+.imgright {
+
+    width: auto;
+    background-color: transparent;
+    clear: right;
+    float: right;
+    margin: 10px 0px 10px 25px;
+    /*padding: 2px;
+    border: 1px solid #c8ccd1;*/
+}
+
+div.sitenav, div.footer {
+    background-color: #004E7C;
+    opacity: 0.9;
+    padding-top: 30px;
+    padding-bottom: 18px;
+}
+
+/*
+div.sitenav {
+    display: flex;
+    align-self: flex-end;
+    justify-content: center;
+}
+*/
+
+#pagetitle, .navtext, footer, .landingnav {
+    color: white;
+    font-weight: 500;
+}
+
+#pagetitle, div.nav{
+    width: 100%;
+}
+
+.navtext{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.landingnav {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+#pagetitle {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/*
+div.nav {
+    display: flex;
+    text-align: left;
+    align-self: flex-end;
+    justify-content: center;
+    flex-wrap: nowrap;
+}*/
+
+div.nav a, div.sitenav a {
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+div.nav a:hover, div.sitenav a:hover {
+    opacity: 0.3;
+}
+
+div.footer {
+    display: block;
+    text-align: center;
+}
+
+div.footer a {
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+div.footer a:hover {
+    opacity: 0.3;
+}
+
+
+.nav-link {
+    margin-right: 30px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    background-color: #F0F0F0;
+    cursor: pointer;
+    padding: 18px;
+    width: 55%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+    color: #004E7C;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    color: black;
+    background-color: #C8C8C8;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: #F0F0F0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.accordion:before {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 16px;
+    color: black;
+    float: left;
+    margin-right: 10px;
+    margin-top: 3px;
+    vertical-align: middle;
+
+}
+
+.active:before {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+.acc {
+    width: 80%;
+    display: inline;
+}
+
+
+#gallery-frame {
+    width: 100%;
+    height: 550px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#preview-frame {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto;
+    gap: 5px;
+    grid-template-areas:
+    'item1 item2 item3 item4';
+    height: auto;
+}
+
+#preview-frame-outer {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+#preview-frame > div {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+    height: 110px;
+    color: black;
+    opacity: 0.65;
+    transition: opacity 0.4s ease-out;
+    vertical-align: middle;
+    border-radius: 20px 20px 0 0;
+  }
+
+#expanded > div {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: 0 0 20px 20px;
+}
+
+#item1 { 
+    grid-area: item1; 
+    background-color: #B73225 !important;
+}
+#item2 { 
+    grid-area: item2; 
+    background-color: #004E7C !important;
+}
+#item3 { 
+    grid-area: item3; 
+    background-color: #5C5F58 !important;
+}
+#item4 { 
+    grid-area: item4; 
+    background-color: white !important;
+}
+
+#item1expanded { 
+    background-color: #B73225 !important;
+}
+#item2expanded { 
+    background-color: #004E7C !important;
+}
+#item3expanded { 
+    background-color: #5C5F58 !important;
+}
+#item4expanded { 
+    background-color: white !important;
+}
+
+#expanded {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    flex-grow: 1;
+}
+
+.expanded-item {
+    height: auto;
+    width: 100%;
+    transition: opacity 0.25s ease-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+div.preview-center {
+    margin: 0;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transition: top 0.4s;
+}
+
+div.expanded-inner {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+
+div.preview-center {
+    position: relative;
+}
+
+.expanded-preview-active, #preview-frame > div:hover{
+    opacity: 1 !important;
+}
+
+#preview-frame > div:hover .preview-center,
+.expanded-preview-active .preview-center
+{
+    top: 55%;
+}
+
+#preview-frame > div:hover .preview-center .preview-subtitle, 
+.expanded-preview-active .preview-center .preview-subtitle {
+    opacity: 1 !important;
+}
+
+#preview-frame > div:hover .preview-center .preview-title, 
+.expanded-preview-active .preview-center .preview-title {
+    font-size: 25px;
+}
+
+.expanded-title, .expanded-subtitle, .expanded-link {
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 100px;
+}
+
+.preview-subtitle {
+    font-weight: 400;
+    font-size: 19px;
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+}
+
+.preview-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    transition: font-size 0.25s ease-out;
+    font-size: 30px;
+}
+
+.expanded-subtitle {
+    font-weight: 400;
+}
+
+.expanded-title {
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.expanded-link {
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 30px;
+    text-decoration: underline 2px solid;
+}
+
+.expanded-link a {
+    color: black !important;
 }
