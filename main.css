@@ -330,7 +330,7 @@ div.preview-center {
 
 #preview-frame > div:hover .preview-center .preview-title, 
 .expanded-preview-active .preview-center .preview-title {
-    font-size: 25px;
+    font-size: 17px;
 }
 
 .expanded-title, .expanded-subtitle, .expanded-link {
@@ -341,7 +341,7 @@ div.preview-center {
 
 .preview-subtitle {
     font-weight: 400;
-    font-size: 19px;
+    font-size: 17px;
     opacity: 0;
     transition: opacity 0.25s ease-out;
 }
@@ -350,7 +350,7 @@ div.preview-center {
     font-weight: bold;
     margin-bottom: 5px;
     transition: font-size 0.25s ease-out;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .expanded-subtitle {
