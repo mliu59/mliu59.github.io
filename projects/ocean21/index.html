@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Miles Liu - OCEAN21 Underwater ROV Testing Vehicle</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://mliu59.github.io/main.css"
+    />
+
+    <script src="https://mliu59.github.io/js/header.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Miles Liu" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <div class="sitenav" id="sitenav"></div>
+      <script>
+        generateHeader(
+          (title = "OCEAN21 - Underwater ROV Vehicle Testing Asset")
+        );
+      </script>
+    </header>
+
+    <div class="main">
+      <section>
+        <div class="imgright">
+          <img
+            src="https://mliu59.github.io/projects/ocean21/beach.png"
+            width="300"
+          />
+          <img
+            src="https://mliu59.github.io/projects/ocean21/final.png"
+            width="300"
+          />
+          <img
+            src="https://mliu59.github.io/projects/ocean21/followCropped.gif"
+            width="300"
+          />
+          <img
+            src="https://mliu59.github.io/projects/ocean21/controlledTug.gif"
+            width="300"
+          />
+        </div>
+
+        <h1>OCEAN21 - Underwater ROV Vehicle Testing Asset (VTA)</h1>
+
+        <p>
+          For my MechE Senior Design project, our team (OCEAN21) was tasked by
+          our sponsors,
+          <a href="https://www.oceaneering.com/"
+            >Oceaneering International, Inc.</a
+          >, to design an autonomous surface vehicle that can track and follow
+          small underwater ROVs (remotely operated vehicle) during vehicle
+          deployment testing.
+        </p>
+
+        <p>
+          To achieve this, our team designed, built, and tested a prototype
+          vehicle testing asset (VTA) that is conveniently deployable, low cost,
+          and can actively track and follow a tethered underwater vehicle in
+          open water deployment environments. The VTA tracks and follows the ROV
+          using both an autopilot system coupled with ROV vehicle state data
+          stream, as well as a mechanical solution utilizing tether tension to
+          estimate relative ROV positions.
+        </p>
+
+        <p>
+          The final Spring semester prototype outperformed a previous benchmark
+          solution by <strong>75%-90%</strong> in its performance metric
+          (average tether tension reduction) under various operating conditions.
+          Our team was also awarded Best Presentation Award by a panel of ASME
+          judges for our year end presentation.
+        </p>
+      </section>
+
+      <button class="accordion"><h1 class="acc">Project Motivation</h1></button>
+
+      <section class="panel">
+        <p>
+          As motivation for the project, long range operations of ROVs commonly
+          require long fiber cables for tele-operation and data transfer, since
+          wireless connections are less than ideal underwater. A surface vehicle
+          or floating device attached to the ROV with a shorter fixed length
+          tether can serve as a wireless data relay and tether management system
+          for the ROV. However, it can hinder the ROV's maneuverability, since
+          the ROV has to drag the surface vehicle along with it.
+        </p>
+
+        <p>
+          By adding autonomous navigation capabilities to the surface vehicle,
+          we can actively keep it within a certain threshold distance from the
+          underwater ROV, to ensure that the connected tether is never taut,
+          thus mitigating the tether tension that we are trying to reduce.
+        </p>
+      </section>
+
+      <button class="accordion"><h1 class="acc">Technical Details</h1></button>
+
+      <section class="panel">
+        <p>
+          For the mechanical design, the vehicle is built from standard 80-20
+          T-slotted frames and PVC pipes for modularity during the prototyping
+          process, measuring 40"x32"x20" and 45 lbs. The vehicle is powered with
+          2 underwater thrusters running at 20V, with battery capacity to enable
+          6 hour operations. The vehicle's underwater load-cell and thrusters
+          are mounted on pivot structures to allow for compact storage and
+          transportation.
+        </p>
+
+        <p>
+          For the vehicle's control system, there are two main objectives:
+          tracking of the ROV, and active navigation to follow.
+        </p>
+        <p>
+          To track the ROV, the main approach is to establish a data-stream for
+          the ROV's vehicle state from Oceaneering's separate ROV control
+          system, including vehicle coordinates, depth, and speed. From there,
+          waypoint commands can be given to the VTA for it to continuously
+          predict the ROV's trajectory and follow the ROV. However, in rare
+          scenarios in which data transfer fails, the VTA is equipped with an
+          onboard custom load cell to measure tether tension and angle when it
+          is taut. The VTA can then estimate the ROV's relative position and
+          perform navigation.
+        </p>
+
+        <p>
+          For the vehicle's navigation, high level commands such as waypoint are
+          sent from the command station via radio. They are then processed and
+          executed by a PixHawk 4 autopilot module installed with a modified
+          ArduPilot autopilot software. Low level motor commands are then passed
+          to an Arduino and then to motor controllers for actuation.
+        </p>
+      </section>
+
+      <button class="accordion"><h1 class="acc">Skills Involved</h1></button>
+
+      <section class="panel">
+        <h3>Technical Skills</h3>
+        <ul>
+          <li>Python, C++ programming</li>
+          <li>Sensors & filter algorithms (GPS, IMU, Strain gauges, Kalman Filter, etc.)</li>
+          <li>Actuator & motor control</li>
+          <li>Circuit design & power management</li>
+          <li>Wired & wireless communication systems (Radio, TCP/IP, Serial, I2C, etc.)</li>
+          <li>Controller design</li>
+          <li>Mechanical design, CAD</li>
+          <li>mechanical assembly, soldering, machining</li>
+          <li>System integration & testing</li>
+        </ul>
+
+        <h3>Project Management Skills</h3>
+        <ul>
+          <li>Client & team internal communication</li>
+          <li>Establishing timeline & project objectives</li>
+          <li>Task management & prioritization</li>
+          <li>Risk management</li>
+          <li>Budgeting</li>
+          <li>Technical documentation & reports</li>
+        </ul>
+      </section>
+    </div>
+    <footer></footer>
+  </body>
+  <script src="https://mliu59.github.io/js/subpage.js"></script>
+</html>
