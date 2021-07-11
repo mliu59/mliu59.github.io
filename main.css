@@ -84,6 +84,19 @@ footer {
     border: 1px solid #c8ccd1;*/
 }
 
+.imgwcaption {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.imgcaption {
+    font-size: 15px;
+    color: #404040;
+    text-align: center;
+    margin-top: 10px
+}
+
 div.sitenav, div.footer {
     background-color: #004E7C;
     opacity: 0.9;

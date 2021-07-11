@@ -3,10 +3,18 @@
   <head>
     <title>Miles Liu - OCEAN21 Underwater ROV Testing Vehicle</title>
 
+    <!--
     <link
       rel="stylesheet"
       type="text/css"
       href="https://mliu59.github.io/main.css"
+    />
+    -->
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="C:\GitHub\mliu59.github.io\main.css"
     />
 
     <script src="https://mliu59.github.io/js/header.js"></script>
@@ -38,18 +46,23 @@
 
     <div class="main">
       <section>
-        <div class="imgright">
+        <div class="imgright imgwcaption" style="width: 300px">
           <img
             src="https://mliu59.github.io/projects/ocean21/beach.png"
             width="300"
           />
+          <div class="imgcaption">
+            VTA Prototype at Hammerman Beach, MD
+          </div>
         </div>
         
-        <div class="imgright">
+        <div class="imgright imgwcaption" style="width: 300px">
           <img
             src="https://mliu59.github.io/projects/ocean21/followCropped.gif"
-            width="300"
           />
+          <div class="imgcaption">
+            VTA following a pseudo-ROV surface vehicle during performance testing
+          </div>
         </div>
         
 
@@ -87,11 +100,14 @@
       <button class="accordion"><h1 class="acc">Project Motivation</h1></button>
 
       <section class="panel">
-        <div class="imgright">
+        <div class="imgleft imgwcaption" style="width: 300px">
           <img
             src="https://mliu59.github.io/projects/ocean21/tethertension.png"
             width="300"
           />
+          <div class="imgcaption">
+            The goal of the VTA is to mitigate the tension exerted on the ROV by the surface vehicle
+          </div>
         </div>
 
         <p>
@@ -116,17 +132,23 @@
 
       <section class="panel">
 
-        <div class="imgright">
+        <div class="imgright imgwcaption" style="width: 300px">
           <img
             src="https://mliu59.github.io/projects/ocean21/final.png"
             width="300"
           />
+          <div class="imgcaption">
+            CAD rendering showing further improvements for the VTA prototype
+          </div>
         </div>
-        <div class="imgright">
+        <div class="imgright imgwcaption" style="width: 300px">
           <img
             src="https://mliu59.github.io/projects/ocean21/controlledTug.gif"
             width="300"
           />
+          <div class="imgcaption">
+            VTA autonomously sensing a directional tether tension and "following the ROV" on the other end of the tether in a controlled environment
+          </div>
         </div>
 
         <p>
@@ -154,7 +176,15 @@
           is taut. The VTA can then estimate the ROV's relative position and
           perform navigation.
         </p>
-
+        <div class="imgright imgwcaption" style="width: 300px">
+          <img
+            src="https://mliu59.github.io/projects/ocean21/MP.png"
+            width="300"
+          />
+          <div class="imgcaption">
+            VTA can also be controlled and monitored with the Mission Planner ground control
+          </div>
+        </div>
         <p>
           For the vehicle's navigation, high level commands such as waypoint are
           sent from the command station via radio. They are then processed and
