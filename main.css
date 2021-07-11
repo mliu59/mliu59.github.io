@@ -73,6 +73,17 @@ footer {
     border: 1px solid #c8ccd1;*/
 }
 
+.imgleft {
+
+    width: auto;
+    background-color: transparent;
+    clear: left;
+    float: left;
+    margin: 10px 30px 10px 0px;
+    /*padding: 2px;
+    border: 1px solid #c8ccd1;*/
+}
+
 div.sitenav, div.footer {
     background-color: #004E7C;
     opacity: 0.9;
