@@ -46,6 +46,9 @@
 
     <div class="main">
       <section>
+        
+        <h1>OCEAN21 - Underwater ROV Vehicle Testing Asset (VTA)</h1>
+
         <div class="imgright imgwcaption" style="width: 300px">
           <img
             src="https://mliu59.github.io/projects/ocean21/beach.png"
@@ -61,12 +64,12 @@
             src="https://mliu59.github.io/projects/ocean21/followCropped.gif"
           />
           <div class="imgcaption">
-            VTA following a pseudo-ROV surface vehicle during performance testing
+            VTA autonomously following a pseudo-ROV surface vehicle during performance testing
           </div>
         </div>
         
 
-        <h1>OCEAN21 - Underwater ROV Vehicle Testing Asset (VTA)</h1>
+        
 
         <p>
           For my MechE Senior Design project, our team (OCEAN21) was tasked by
@@ -92,6 +95,8 @@
           The final Spring semester prototype outperformed a previous benchmark
           solution by <strong>75%-90%</strong> in its performance metric
           (average tether tension reduction) under various operating conditions.
+        </p>
+        <p>
           Our team was also awarded Best Presentation Award by a panel of ASME
           judges for our year end presentation.
         </p>
@@ -126,6 +131,13 @@
           underwater ROV, to ensure that the connected tether is never taut,
           thus mitigating the tether tension that we are trying to reduce.
         </p>
+
+        <p>
+          Small ROV vehicle testing is usually conducted in a medium-sized lake, 
+          which can have some mild wind and wave forces to consider (Sea-state 0), but our
+          sponsors were also eager to potentially use the vehicle in more turbulent conditions
+          in open seas.  
+        </p>
       </section>
 
       <button class="accordion"><h1 class="acc">Technical Details</h1></button>
@@ -151,14 +163,27 @@
           </div>
         </div>
 
+        <div class="imgright imgwcaption" style="width: 300px">
+          <img
+            src="https://mliu59.github.io/projects/ocean21/MP.png"
+            width="300"
+          />
+          <div class="imgcaption">
+            VTA can also be controlled and monitored with the Mission Planner ground control
+          </div>
+        </div>
+
         <p>
           For the mechanical design, the vehicle is built from standard 80-20
           T-slotted frames and PVC pipes for modularity during the prototyping
-          process, measuring 40"x32"x20" and 45 lbs. The vehicle is powered with
-          2 underwater thrusters running at 20V, with battery capacity to enable
-          6 hour operations. The vehicle's underwater load-cell and thrusters
+          process, measuring 40"x32"x20" and 45 lbs. The vehicle's underwater load-cell and thrusters
           are mounted on pivot structures to allow for compact storage and
           transportation.
+        </p>
+        <p>
+          The vehicle is powered with
+          2 underwater thrusters running at 20V, with battery capacity to enable
+          6 hour operations. 
         </p>
 
         <p>
@@ -170,21 +195,18 @@
           the ROV's vehicle state from Oceaneering's separate ROV control
           system, including vehicle coordinates, depth, and speed. From there,
           waypoint commands can be given to the VTA for it to continuously
-          predict the ROV's trajectory and follow the ROV. However, in rare
+          predict the ROV's trajectory and follow the ROV, utilizing its own onboard GPS, 
+          IMU, compass, etc.  
+        </p>
+        <p>
+          However, in rare
           scenarios in which data transfer fails, the VTA is equipped with an
           onboard custom load cell to measure tether tension and angle when it
           is taut. The VTA can then estimate the ROV's relative position and
-          perform navigation.
+          perform navigation. This system can operate independent from ground control commands, 
+          allowing it to operate in turbulent sea conditions that can interrupt wireless communication.
         </p>
-        <div class="imgright imgwcaption" style="width: 300px">
-          <img
-            src="https://mliu59.github.io/projects/ocean21/MP.png"
-            width="300"
-          />
-          <div class="imgcaption">
-            VTA can also be controlled and monitored with the Mission Planner ground control
-          </div>
-        </div>
+        
         <p>
           For the vehicle's navigation, high level commands such as waypoint are
           sent from the command station via radio. They are then processed and
@@ -204,7 +226,7 @@
           <li>Actuator & motor control</li>
           <li>Circuit design & power management</li>
           <li>Wired & wireless communication systems (Radio, TCP/IP, Serial, I2C, etc.)</li>
-          <li>Controller design</li>
+          <li>Controller design & tuning</li>
           <li>Mechanical design, CAD</li>
           <li>mechanical assembly, soldering, machining</li>
           <li>System integration & testing</li>

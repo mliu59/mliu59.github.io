@@ -94,7 +94,8 @@ footer {
     font-size: 15px;
     color: #404040;
     text-align: center;
-    margin-top: 10px
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 div.sitenav, div.footer {
