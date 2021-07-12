@@ -172,6 +172,7 @@ img {
 #pagetitle {
     text-align: left;
     margin-bottom: 15px;
+    transition: 0.1s;
 }
 
 span.inline-subtitle {
