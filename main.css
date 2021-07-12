@@ -65,6 +65,7 @@ header {
     background: white;
     font-family: 'Roboto', sans-serif;
     margin-bottom: 30px;
+    transition: 0.1s;
 }
 
 footer {
@@ -412,8 +413,8 @@ div.preview-center {
     font-size: 17px;
     opacity: 0;
     transition: opacity 0.25s ease-out;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .preview-title {

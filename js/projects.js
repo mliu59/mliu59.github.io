@@ -16,8 +16,8 @@ function changeCss () {
         textSize = maxTextSize - this.scrollY / maxScroll * (maxTextSize - textSize);
     }
 
-    navElement.style.opacity = opacity;
-    footerEl.style.opacity = opacity;
+    navElement.style.opacity = 1;
+    footerEl.style.opacity = 1;
     navTitleEl.style.fontSize = textSize+"px";
 }
 

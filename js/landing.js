@@ -27,4 +27,31 @@ function previewProjects() {
     }
 }
 
+function changeCss () {
+    var navElement = document.querySelector("header");
+    var footerEl = document.querySelector("footer");
+    var navTitleEl = document.getElementById("pagetitle");
+    var maxScroll = 100;
+    var minScroll = 15;
+    var opacity = 0.92;
+    var maxTextSize = 80;
+    var textSize = 40;
+    if (this.scrollY < minScroll) {
+        opacity = 1;
+        textSize = maxTextSize;
+    }
+    else if (this.scrollY < maxScroll) {
+        opacity = 1 - this.scrollY / maxScroll * 0.15;
+        textSize = maxTextSize - this.scrollY / maxScroll * (maxTextSize - textSize);
+    }
+
+    //navElement.style.opacity = opacity;
+    //footerEl.style.opacity = opacity;
+    navElement.style.opacity = 1;
+    footerEl.style.opacity = 1;
+    navTitleEl.style.fontSize = textSize+"px";
+}
+
+window.addEventListener("scroll", changeCss , false);
+changeCss();
 previewProjects();
