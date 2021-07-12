@@ -411,6 +411,8 @@ div.preview-center {
     font-size: 17px;
     opacity: 0;
     transition: opacity 0.25s ease-out;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .preview-title {
@@ -418,6 +420,8 @@ div.preview-center {
     margin-bottom: 5px;
     transition: font-size 0.25s ease-out;
     font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .expanded-subtitle {
