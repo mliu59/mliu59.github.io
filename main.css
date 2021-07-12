@@ -34,6 +34,15 @@ body {
     font-size: 20px;
 }
 
+@media (min-width: 1200px) {
+    .main {
+        width: 1100px !important;
+    }
+    .sitenavbar {
+        width: 1100px !important;
+    }
+}
+
 li {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -44,6 +53,10 @@ section {
     margin-bottom: 25px;
     margin-left: 0px;
     margin-right: 0px;
+}
+
+section.panel {
+    margin: 0 0 0 0 !important;
 }
 
 header {
@@ -96,6 +109,8 @@ footer {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 div.sitenav, div.footer {
@@ -112,6 +127,28 @@ div.sitenav {
     justify-content: center;
 }
 */
+
+.gif-gallery {
+    display: flex;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.gif-gallery-column {
+    width: 50%;
+    margin: 10px;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.vta-gif {
+    height: 200px;
+    width: auto;
+    margin: auto;
+}
 
 #pagetitle, .navtext, footer, .landingnav {
     color: white;
