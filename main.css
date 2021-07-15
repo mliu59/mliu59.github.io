@@ -422,8 +422,8 @@ div.preview-center {
     margin-bottom: 5px;
     transition: font-size 0.25s ease-out;
     font-size: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .expanded-subtitle {
@@ -445,4 +445,8 @@ div.preview-center {
 
 .expanded-link a {
     color: black !important;
+}
+
+#navblock {
+    transition: 0.1s;
 }
