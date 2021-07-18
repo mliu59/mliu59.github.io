@@ -28,13 +28,10 @@ function previewProjects() {
 }
 
 function changeCss () {
-    var navElement = document.querySelector("header");
-    var footerEl = document.querySelector("footer");
     var navTitleEl = document.getElementById("pagetitle");
     var navblock = document.getElementById("navblock");
     var maxScroll = 100;
     var minScroll = 25;
-    var opacity = 0.92;
     var maxTextSize = 80;
     var minTextSize = 45;
     var textSize = 80;
@@ -42,26 +39,21 @@ function changeCss () {
     var marginMin = 0;
     var margin = 45;
 
+    
+    
     if (this.scrollY <= minScroll) {
-        opacity = 1;
         textSize = maxTextSize;
         margin = marginMax;
     }
     else if (this.scrollY < maxScroll) {
-        opacity = 1 - this.scrollY / maxScroll * 0.15;
         textSize = maxTextSize - this.scrollY / maxScroll * (maxTextSize - textSize);
         margin = marginMax - this.scrollY / maxScroll * (marginMax - marginMin);
     } else if (this.scrollY >= maxScroll) {
-        opacity = 1;
         textSize = minTextSize;
         margin = marginMin;
 
     }
-
-    //navElement.style.opacity = opacity;
-    //footerEl.style.opacity = opacity;
-    navElement.style.opacity = 1;
-    //footerEl.style.opacity = 1;
+    
     navTitleEl.style.fontSize = textSize+"px";
     navblock.style.marginTop = margin+"px";
     navblock.style.marginBottom = margin+"px";
