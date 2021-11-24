@@ -3,11 +3,7 @@
   <head>
     <title>Miles Liu's Personal Website</title>
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="main.css"
-    />
+    <link rel="stylesheet" type="text/css" href="main.css" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
 
@@ -27,139 +23,222 @@
   </head>
 
   <body>
-
     <header>
-        <div class="sitenav" id="sitenav">
-        </div>
-        <script>
-          generateHeader(navSize = "25px", titleSize = "80px", width = "55%", margin = "45px auto", title = "MILES LIU");
-        </script>
+      <div class="sitenav" id="sitenav"></div>
+      <!--
+      <script>
+        generateHeader(
+          (navSize = "25px"),
+          (titleSize = "80px"),
+          (width = "55%"),
+          (margin = "45px auto"),
+          (title = "MILES LIU")
+        );
+      </script>
+      -->
+      <script>
+        generateHeader();
+      </script>
     </header>
 
-
     <div class="main" style="width: 55%">
-
-      <section style="margin-top: 60px;">
+      <section style="margin-top: 60px">
         <div class="imgright">
-          <img
-            src="assets/ML.png"
-            width="200"
-          />
+          <img src="assets/ML.png" width="200" />
         </div>
 
-        <p>Hello! My name is Miles Liu. I recently graduated from Johns Hopkins University with a B.S. in Mechanical
-            Engineering, and I am currently working towards a Master of Science in Engineering in Robotics at the <a
-                href="https://lcsr.jhu.edu/">JHU
-                Laboratory for Computational and Sensory Robotics</a>, expecting to graduate in 2022.
+        <p>
+          Hello! My name is Miles Liu. I recently graduated from Johns Hopkins
+          University with a B.S. in Mechanical Engineering, and I am currently
+          working towards a Master of Science in Engineering in Robotics at the
+          <a href="https://lcsr.jhu.edu/"
+            >JHU Laboratory for Computational and Sensory Robotics</a
+          >, expecting to graduate in 2022.
         </p>
-        <p>I currently work as an Engineering Associate with the amazing team at the startup company <a
-                href="https://www.theclearmask.com/">ClearMask,
-                LLC</a>, where my main responsibilities include development, testing, and
-            maintenance of new products, external webpages, and internal digital data and operational platforms.
+        <p>
+          I currently work as an Engineering Associate with the amazing team at
+          the startup company
+          <a href="https://www.theclearmask.com/">ClearMask, LLC</a>, where my
+          main responsibilities include development, testing, and maintenance of
+          new products, external webpages, and internal digital data and
+          operational platforms.
         </p>
-    </section>
+        <p>
+          While you are here, check out this game I've been working on with my
+          friends: <a href="https://wikispeedruns.com/">Wikispeedruns</a>.
+        </p>
+      </section>
 
-      <div id="pagetitle" style="margin-top: 60px; margin-bottom: 25px;">
-          <div style="color: black; font-size: 40px; font-weight: bold; margin-right: 50px;">
-              My Featured Projects
-          </div>
-            <div style="color: black; font-size: 20px; font-weight: 400; overflow: hidden; white-space: nowrap;">
-                Full project list can be found 
-                <a href="projects">
-                    HERE
-                </a>
-            </div>
+      <div id="pagetitle" style="margin-top: 60px; margin-bottom: 25px">
+        <div
+          style="
+            color: black;
+            font-size: 40px;
+            font-weight: bold;
+            margin-right: 50px;
+          "
+        >
+          My Featured Projects
+        </div>
+        <div
+          style="
+            color: black;
+            font-size: 20px;
+            font-weight: 400;
+            overflow: hidden;
+            white-space: nowrap;
+          "
+        >
+          Full project list can be found
+          <a href="projects"> HERE </a>
+        </div>
       </div>
       <div id="gallery-frame">
         <div id="preview-frame-outer">
           <div id="preview-frame">
             <div class="preview-inner" id="item1">
               <div class="preview-center">
-                <div class="preview-title">OCEAN21 VTA</div>
-                <div class="preview-subtitle">Autonomous surface vehicle for ROV testing</div>
+                <div class="preview-title">Sanaria Robot</div>
+                <div class="preview-subtitle">
+                  Automation of mosquito salivary gland collection.
+                </div>
               </div>
             </div>
             <div class="preview-inner" id="item2">
               <div class="preview-center">
-                <div class="preview-title">Biaxial Biogel Stretcher</div>
-                <div class="preview-subtitle">Fixture for testing cell mechanical properties</div>
+                <div class="preview-title">OCEAN21 VTA</div>
+                <div class="preview-subtitle">
+                  Autonomous surface vehicle for ROV testing
+                </div>
               </div>
             </div>
             <div class="preview-inner" id="item3">
               <div class="preview-center">
-                <div class="preview-title">DECON</div>
-                <div class="preview-subtitle">Autonomous disinfection robot for hospitals</div>
+                <div class="preview-title">Wikispeedruns</div>
+                <div class="preview-subtitle">
+                  Online competitive browser game based on Wikipedia
+                </div>
               </div>
             </div>
             <div class="preview-inner" id="item4">
               <div class="preview-center">
-                <div class="preview-title">Wikispeedruns</div>
-                <div class="preview-subtitle">Online competitive browser game based on Wikipedia</div>
+                <div class="preview-title">DECON</div>
+                <div class="preview-subtitle">
+                  Autonomous disinfection robot for hospitals
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div id="expanded">
           <div class="expanded-item" id="item1expanded">
+            <div class="imgleft" style="width:30%; margin-left:10%;margin-right:10%;margin-top:60px">
+              <img src="projects/sanaria/robot.jpg" style="border: 2px solid black; width:100%"/>
+            </div>
             <div class="expanded-inner">
               <div class="expanded-center">
-                <div class="expanded-title">Item 1</div>
+                <div class="expanded-title">
+                  Sanaria robot - automation of mosquito salivary gland
+                  collection
+                </div>
                 <div class="expanded-subtitle">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>
+                    Sanaria Inc.'s malaria vaccine has the potential to eliminate
+                    one of the world's deadliest diseases. However, the vaccine
+                    relies on mosquito salivary gland for its production, and the
+                    current extract process is completely manual and highly labor
+                    intensive.
+                  </p>
+                  <p>
+                    This project aims to build an automated mosquito dissection robot platform that can automate this process, to improve overall vaccine production efficiency.
+                  </p>
                 </div>
                 <div class="expanded-link">
-                    <a href="https://www.facebook.com">Read More</a>
+                  <a href="projects/sanaria/">Read More</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="expanded-item" id="item2expanded">
+            <div class="imgleft" style="width:30%; margin-left:10%;margin-right:10%;margin-top:45px">
+              <img src="projects/ocean21/controlledTug.gif" style="border: 2px solid black; width:100%"/>
+              <img src="projects/ocean21/beach.png" style="border: 2px solid black; width:100%"/>
+            </div>
             <div class="expanded-inner">
               <div class="expanded-center">
-                <div class="expanded-title">Item 2</div>
+                <div class="expanded-title">
+                  OCEAN21 - Autonomous surface vehicle for underwater ROV
+                  testing
+                </div>
                 <div class="expanded-subtitle">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>
+                    Small underwater ROVs (Remote Operated Vehicle) communicate
+                    with ground control through a long fiber-optic cable, which
+                    can be costly to use during testing.
+                  </p>
+                  <p>
+                    Our prototype is an autonomous surface vehicle that follows
+                    the ROV to facilitate wireless to wired communication
+                    without introducing additional drag to the ROV system.
+                  </p>
                 </div>
                 <div class="expanded-link">
-                    <a href="https://www.google.com">Read More</a>
+                  <a href="projects/ocean21/">Read More</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="expanded-item" id="item3expanded">
+            <div class="imgleft" style="width:25%; margin-left:12.5%;margin-right:12.5%;margin-top:80px">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1280px-Wikipedia-logo-v2-en.svg.png" style="width:100%"/>
+            </div>
             <div class="expanded-inner">
               <div class="expanded-center">
-                <div class="expanded-title">Item 3</div>
+                <div class="expanded-title">
+                  Wikispeedruns - Wikipedia based online competitive browser
+                  game
+                </div>
                 <div class="expanded-subtitle">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>
+                    Goal of the game is very simple: Try to get from one
+                    wikipedia page to another as fast as possible!
+                  </p>
+                  <p>
+                    Test your obscure trivia knowledge and websurfing prowess
+                    against other players on the leaderboard.
+                  </p>
                 </div>
                 <div class="expanded-link">
-                    <a href="https://en.wikipedia.org/wiki/Lorem_ipsum">Read More</a>
+                  <a href="projects/wikispeedruns/">Read More</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="expanded-item" id="item4expanded">
+            <div class="imgleft" style="width:30%; margin-left:10%;margin-right:10%;margin-top:55px">
+              <img src="projects/decon/croppedRobot.png" style="border: 2px solid black; width:100%"/>
+            </div>
             <div class="expanded-inner">
               <div class="expanded-center">
-                <div class="expanded-title">Item 4</div>
+                <div class="expanded-title">
+                  DECON - Autonomous disinfection robot for hospitals
+                </div>
                 <div class="expanded-subtitle">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  <p>
+                    Healthcare Associated Infections (HAIs) pose serious health
+                    risks for patients in healthcare facilities, but can be
+                    prevented through routine disinfection and good hygiene
+                    protocols.
+                  </p>
+                  <p>
+                    Our solution for further decreasing infection rates is with
+                    an autonomous robot platform that disinfects contamination
+                    hot-spots in healthcare facilities without disrupting
+                    existing workflow.
+                  </p>
                 </div>
                 <div class="expanded-link">
-                    <a href="https://en.wikipedia.org/wiki/">Read More</a>
+                  <a href="projects/decon/">Read More</a>
                 </div>
               </div>
             </div>

@@ -4,7 +4,6 @@ function changeCss () {
     var navTitleEl = document.getElementById("pagetitle");
     var maxScroll = 100;
     var minScroll = 15;
-    var opacity = 0.92;
     var maxTextSize = 45;
     var textSize = 28;
     if (this.scrollY < minScroll) {
@@ -12,12 +11,9 @@ function changeCss () {
         textSize = maxTextSize;
     }
     else if (this.scrollY < maxScroll) {
-        opacity = 1 - this.scrollY / maxScroll * 0.15;
         textSize = maxTextSize - this.scrollY / maxScroll * (maxTextSize - textSize);
     }
 
-    //navElement.style.opacity = opacity;
-    //footerEl.style.opacity = opacity;
     navElement.style.opacity = 1;
     footerEl.style.opacity = 1;
     navTitleEl.style.fontSize = textSize+"px";

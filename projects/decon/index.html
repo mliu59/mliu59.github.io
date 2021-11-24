@@ -103,7 +103,7 @@
         The robotic system is mainly divided into three main operational
         subsystems:
         <strong>Navigation, Detection, Disinfection. </strong>Robot operation is
-        implemented through ROS.
+        implemented through ROS (Robot Operating System).
       </p>
 
       <div class="imgright">
@@ -114,9 +114,7 @@
       </div>
       <p>
         For <strong>Navigation</strong>, the robot relies on a LiDAR and SLAM to
-        create a local map, and uses the Dynamic Window Approach to path find
-        and navigate in a dynamic environment like that of a healthcare facility
-        with average foot traffic and frequent obstacles. We used a
+        navigate in a dynamic environment like that of a healthcare facility. We used a
         <a href="https://www.robotis.us/turtlebot-3-waffle-pi/"
           >Robotis TurtleBot3 Waffle</a
         >
@@ -129,12 +127,7 @@
         For <strong>Detection</strong>, we want the robot to be able to
         identify, categorize, and localize disinfection targets (in our
         prototype setup: doorknobs and light-switches) within a specified ROI,
-        after the robot has navigated to the general area. It will also need to
-        recognize objects that are NOT to be subjected to disinfection for the
-        robot to actively avoid, regardless of whether or not a target is
-        nearby, such as human faces (would not want to flash high concentration
-        UVC light at someone's face) and power outlets (due to the liquid
-        disinfectant spray),
+        after the robot has navigated to the general area.
       </p>
 
       <div class="imgright">
@@ -148,52 +141,29 @@
         To do this, we used a Zed stereo camera for object detection and
         localization. A Faster RCNN algorithm trained on the Open Images dataset
         from Google, augmented with our own target images, is used to recognize
-        and categorize objects. The stereo camera can then triangulate the
-        object's coordinates with respect to robot frame. That is then fed to
-        the navigation algorithm or the robot arm to position the disinfection
-        apparatus for a controlled disinfection on only the target object. We
-        initially only used a Raspberry Pi for all computation, but eventually
-        switched to an Nvidia Jetson TX2 to increase computational power for the
-        robot.
+        and categorize objects.
       </p>
       
       <p>
-        For <strong>Disinfection</strong>, our goal is to deliver disinfection
-        to the target object/area with high efficacy and low risk to nearby
-        humans. For eliminating MRSA and other bacterium, we deployed a combined
-        disinfection approach, using both commercial disinfectant spray as well
+        For <strong>Disinfection</strong>, to eliminate MRSA and other bacterium, we deployed a combined
+        disinfection approach, using both commercial disinfectant spray delivered through a peristaltic
+        pump and an electronically controlled sprayer, as well
         as a UVC LED array emitting 250-260 nm wavelength UV light for
-        disinfection. This specific UV light range can deactivate bacterial DNA
-        to effectively stop bacterial growth. Our initial controlled laboratory
-        tests found that UVC is effective in deactivating bacteria, but requires
-        either prolonged exposure or high dosage beyond the power delivered by
-        our LED array. The disinfectant spray is delivered through a peristaltic
-        pump and an electronically controlled sprayer.
+        disinfection to deactivate bacterial DNA.
       </p>
       
       <p>
         To ensure safety, the entire disinfection system is contained within a
-        disinfection cone, mounted on a 5-DoF robotic arm. When the disinfection
-        mechanism is engaged (detection and navigation systems have reached a
-        disinfection target within the arm's reach), the arm actuates to place
-        the cone over the target object (doorknob and light-switches) against
-        the wall, and prevents any UVC light from leaking out of the cone and
-        potentially damaging the skin/eyes of anyone nearby. The disinfectant
+        disinfection cone, mounted on a 5-DoF robotic arm. The disinfectant
         sprayer is placed at the base of the cone, and the UVC LEDs are radially
         positioned around the cone. The cone itself is reflective on the inside
         to maximize the amount of UVC delivered to the object surface.
       </p>
 
       <p>
-        Nearing the end of the project academic year during the
-        integration stages of the prototype, the COVID pandemic forced the team
-        to work remotely on the project, which significantly hindered progress.
         Ultimately, we were able to develop a prototype that was able to
-        navigate in a controlled environment, identify a small subset of target
-        objects, and perform the disinfection routine. With more time, we would
-        have wanted to further improve the robot's navigation efficiency,
-        increase UVC disinfection efficacy, and make our solution more robust
-        for dynamic environments through controlled deployment testing.
+        navigate in a controlled environment, identify a subset of target
+        objects, and perform the disinfection routine.
       </p>
 
     </section>

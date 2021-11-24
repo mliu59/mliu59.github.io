@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Miles Liu - Sanaria Mosquito Dissection Robot</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css" />
+
+    <script src="../../js/header.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Miles Liu" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <div class="sitenav" id="sitenav"></div>
+      <script>
+        generateHeader((title = "Sanaria Mosquito Dissection Robot"));
+      </script>
+    </header>
+
+    <div class="main">
+      <section>
+        <!--
+      <div class="imgright">
+        <img
+          src="https://mliu59.github.io/projects/decon/robot.png"
+          width="170"
+        />
+      </div>
+      -->
+
+        <h1>Sanaria Mosquito Dissection Robot (Ongoing)</h1>
+
+        <p>
+          The Sanaria Mosquito Dissection Robot is current my MSE research
+          project at the
+          <a href="https://ciis.lcsr.jhu.edu/doku.php"
+            >JHU Computer Integrated Interventional Systems Laboratory</a
+          >. The robot our team is designing aims to significantly improve the
+          efficiency of a mosquito salivary gland extraction microdissection
+          process, which is currently a completely manual procedure. The
+          extracted glands are used for the production of the PfSPZ malaria
+          vaccine by
+          <a href="https://sanaria.com/">Sanaria, Inc.</a>
+        </p>
+
+        <div class="imgright">
+          <img src="robot.jpg" width="400" />
+        </div>
+
+        <p>
+          Operationally, the goal of the system is such that the operator would only need to
+          place mosquitos onto the loading area of the system, and the robot
+          would take care of the rest. The operator would
+          not need extensive microdissection training.  
+        </p>
+
+        <p>
+          The robot platform performs this microdissection procedure through a
+          number of high level steps. It first detects, picks, and properly
+          places the mosquito for decapitation. It then decapitates the mosquito
+          to expose the salivary gland. The salivary is then extracted with a
+          squeeze and suction collection process. These steps are performed at
+          separate workstations, located along a circular turntable, as seen on
+          the right.
+        </p>
+
+
+
+        <p>
+          The system performs a number of computer vision subroutines for
+          localization of mosquito anatomy, and uses ROS (Robot Operating
+          System) for high level system control and simulation for remote
+          development. The most recent prototype of the system was able to
+          achieve a <strong>93% robotic mosquito manipulation</strong> and
+          <strong>87.1% salivary gland collection</strong> success rate.
+        </p>
+
+        <p>
+          Current work on the system involves repeated testing and refining of
+          existing manipulation hardware systems, increasing computer vision
+          reliability through the development of a machine learning model,
+          implementing a control scheme for efficiently processing multiple
+          mosquitos at once, and developing user operation tools for the system
+          to be deployable.
+        </p>
+      </section>
+
+      <button class="accordion"><h1 class="acc">Technical Details</h1></button>
+
+      <section class="panel">
+        <p>More technical details to be added! Webpage WIP</p>
+      </section>
+    </div>
+    <footer></footer>
+  </body>
+  <script src="../../js/subpage.js"></script>
+</html>

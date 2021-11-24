@@ -12,14 +12,28 @@ function previewProjects() {
             for (var j = 0; j < items.length; j++) {
                 if (this.id !== items[j]) {
                     document.getElementById(items[j]).classList.remove("expanded-preview-active");
-                    document.getElementById(expandeditems[j]).style.opacity = 0;
-                    document.getElementById(expandeditems[j]).getElementsByClassName("expanded-inner")[0].style.display = "none";
+                    document.getElementById(expandeditems[j]).style.opacity = 1;
+                    document.getElementById(expandeditems[j]).style.display = "none";
+                    document.getElementById(expandeditems[j]).getElementsByClassName("expanded-inner")[0].style.visibility = "hidden";
                 } else {
                     this.classList.add("expanded-preview-active");
                     document.getElementById(expandeditems[j]).style.opacity = 1;
-                    document.getElementById(expandeditems[j]).getElementsByClassName("expanded-inner")[0].style.display = "block";
+                    document.getElementById(expandeditems[j]).style.display = "block";
+                    document.getElementById(expandeditems[j]).getElementsByClassName("expanded-inner")[0].style.visibility = "visible";
                 }
             }
+
+            /*var transitionTime = 250;
+
+            setTimeout(() => { 
+                for (var j = 0; j < items.length; j++) {
+                    if (this.id !== items[j]) {
+                        document.getElementById(expandeditems[j]).style.display = "none";
+                    } else {
+                        document.getElementById(expandeditems[j]).style.display = "block";
+                    }
+                }
+                             }, transitionTime)*/
 
         });
 
@@ -29,34 +43,21 @@ function previewProjects() {
 
 function changeCss () {
     var navTitleEl = document.getElementById("pagetitle");
-    var navblock = document.getElementById("navblock");
     var maxScroll = 100;
-    var minScroll = 25;
-    var maxTextSize = 80;
-    var minTextSize = 45;
-    var textSize = 80;
-    var marginMax = 45;
-    var marginMin = 0;
-    var margin = 45;
+    var minScroll = 15;
+    var maxTextSize = 60;
+    var textSize = 30;
 
     
     
-    if (this.scrollY <= minScroll) {
+    if (this.scrollY < minScroll) {
         textSize = maxTextSize;
-        margin = marginMax;
     }
     else if (this.scrollY < maxScroll) {
         textSize = maxTextSize - this.scrollY / maxScroll * (maxTextSize - textSize);
-        margin = marginMax - this.scrollY / maxScroll * (marginMax - marginMin);
-    } else if (this.scrollY >= maxScroll) {
-        textSize = minTextSize;
-        margin = marginMin;
-
-    }
+    } 
     
     navTitleEl.style.fontSize = textSize+"px";
-    navblock.style.marginTop = margin+"px";
-    navblock.style.marginBottom = margin+"px";
 }
 
 window.addEventListener("scroll", changeCss , false);

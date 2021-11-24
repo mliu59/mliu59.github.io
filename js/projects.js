@@ -4,15 +4,12 @@ function changeCss () {
     var navTitleEl = document.getElementById("pagetitle");
     var maxScroll = 100;
     var minScroll = 15;
-    var opacity = 0.85;
     var maxTextSize = 60;
     var textSize = 30;
     if (this.scrollY < minScroll) {
-        opacity = 1;
         textSize = maxTextSize;
     }
     else if (this.scrollY < maxScroll) {
-        opacity = 1 - this.scrollY / maxScroll * 0.15;
         textSize = maxTextSize - this.scrollY / maxScroll * (maxTextSize - textSize);
     }
 
