@@ -438,6 +438,10 @@ h1, h2, h3, h4, h5, h6 {
     max-height: 225px !important;
 }
 
+.main-subtitle {
+    font-size: 25px;
+}
+
 @media only screen and (max-width: 768px) {
     .main {
         font-size: 15px;
@@ -457,5 +461,9 @@ h1, h2, h3, h4, h5, h6 {
 
     .hideonmobile {
         display: none !important;
+    }
+
+    .main-subtitle {
+        font-size: 15px;
     }
 }
