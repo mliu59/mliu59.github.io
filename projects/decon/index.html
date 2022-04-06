@@ -3,174 +3,180 @@
   <head>
     <title>Miles Liu - DECON Autonomous Disinfection Unit</title>
 
+    <link rel="stylesheet" type="text/css" href="../../main.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Miles Liu" />
 
     <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
-      type="text/css"
-      href="../../main.css"
     />
-    
-    <script src="../../js/header.js"></script>
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Miles Liu">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script defer src="../../js/accordion.js"></script>
+  </head>
 
-
-<body>
-
+  <body>
     <header>
-          <div class="sitenav" id="sitenav">
+      <div class="sitenav pb-2 pt-4" id="sitenav">
+        <div class="container-xl">
+          <div class="pagetitle">
+            Miles Liu - DECON Autonomous Disinfection Unit
           </div>
-          <script>
-              generateHeader(title = "DECON Autonomous Disinfection Unit");
-          </script>
-  </header>
-    
-    
-    <div class="main">
-    <section>
-      <div class="imgright">
-        <img
-          src="robot.png"
-          width="170"
-        />
+          <div class="nav">
+            <a class="nav-link navtext" href="https://mliu59.github.io/"
+              >HOME</a
+            >
+            <a class="nav-link navtext" href="https://mliu59.github.io/projects"
+              >PROJECTS & WORK EXPERIENCE</a
+            >
+            <a class="nav-link navtext" href="mailto:mliu59@jhu.edu">CONTACT</a>
+          </div>
+        </div>
       </div>
+    </header>
 
-      <h1>DECON Autonomous Disinfection Unit</h1>
+    <div class="main container-xl">
+      <section>
+        <div class="imgright">
+          <img src="robot.png" width="170" />
+        </div>
 
-      <p>
-        For the DECON project, our goal is to create a proof-of-concept autonomous robotic
-        platform that can safely disinfect high risk areas/items in healthcare facilities to mitigate the risk of Healthcare Associated
-        Infections (HAIs) without disrupting regular healthcare workflow. To achieve this, our team designed a 
-        prototype that autonomously navigates itself between
-        fixed ROIs, identifies target disinfection with computer vision, and
-        executes a disinfectant spray and UVC radiation disinfection routine on
-        fixed objects. The project is a course project
-        for Leading Innovation Design Team, and was
-        sponsored by the
-        <a href="https://www.jhuapl.edu/"
-          >Johns Hopkins University Applied Physics Laboratory</a
-        >.
-      </p>
-      <!--
-      <div>
+        <h1>DECON Autonomous Disinfection Unit</h1>
+
         <p>
-          From left to right, our multidisciplinary team consists of Charbel Rizk
-          (course instructor), Matt Chea, Neel Kovelamudi, me (Miles Liu), Thomas
-          DiSorbo, Alia Nasrallah, Nafisa Ali Amir (not pictured), and Joshua Liu
-          (not pictured).
+          For the DECON project, our goal is to create a proof-of-concept
+          autonomous robotic platform that can safely disinfect high risk
+          areas/items in healthcare facilities to mitigate the risk of
+          Healthcare Associated Infections (HAIs) without disrupting regular
+          healthcare workflow. To achieve this, our team's goal is to design a proof-of-concept prototype
+          that can autonomously navigate itself between fixed ROIs, identify
+          target disinfection with computer vision, and execute a disinfectant
+          spray and UVC radiation disinfection routine on fixed objects. The
+          project is a course project for Leading Innovation Design Team, and
+          was sponsored by the
+          <a href="https://www.jhuapl.edu/"
+            >Johns Hopkins University Applied Physics Laboratory</a
+          >.
         </p>
-        <a href="https://engineering.jhu.edu/lindt/">
-          <img
-            src="https://mliu59.github.io/decon/team.jpg"
-            width="400"
-          />
-        </a>
-      </div>
-      -->
-      
-      
 
+        <p>
+          Our team was able to develop a prototype that was able to
+          navigate in a controlled environment, identify a subset of target
+          objects, and perform the disinfection routine.
+        </p>
+      </section>
+
+      <h3 class="pt-3">Contributions</h3>
       <p>
-        <!--At the time of participation, I was a Mechanical Engineering
-        undergraduate junior just starting a robotics curriculum, so I had
-        limited opportunities to contribute efficiently to some of the robot
-        subsystems. However, looking back, tThe DECON project was an amazing
-        learning experience for me. As my first year long robotics design
-        project, being able to contribute to a sponsored real-world and highly
-        relevant project-->The DECON project has
-        taught me great deals in communication, project time & resource
-        management, and working in highly multidisciplinary teams. On top of
-        those, I was able to learn first hand the applications of various
-        robotic sensors & actuators, navigational and computational strategies, and core robotic system
-        components.
-      </p>
-    </section>
-
-    <button class="accordion"><h1 class="acc">Technical Details</h1></button>
-
-    <section class="panel"> 
-      
-      <p>
-        The robotic system is mainly divided into three main operational
-        subsystems:
-        <strong>Navigation, Detection, Disinfection. </strong>Robot operation is
-        implemented through ROS (Robot Operating System).
+        For this project, my main contributions include:
       </p>
 
-      <div class="imgright">
-        <img
-          src="DWA.png"
-          width="200"
-        />
-      </div>
-      <p>
-        For <strong>Navigation</strong>, the robot relies on a LiDAR and SLAM to
-        navigate in a dynamic environment like that of a healthcare facility. We used a
-        <a href="https://www.robotis.us/turtlebot-3-waffle-pi/"
-          >Robotis TurtleBot3 Waffle</a
-        >
-        as our base robot chassis.
-      </p>
-      
-      
+      <ul>
+        <li>
+          Design of the robot chassis and layout of robot components.
+        </li>
+        <li>
+          Hardware integration and testing (sensors, motors, robot arm, etc.).
+        </li>
+        <li>
+          Design and testing of the robot's power systems.
+        </li>
+        <li>
+          Sourcing of robot components within project budget.
+        </li>
+      </ul>
 
-      <p>
-        For <strong>Detection</strong>, we want the robot to be able to
-        identify, categorize, and localize disinfection targets (in our
-        prototype setup: doorknobs and light-switches) within a specified ROI,
-        after the robot has navigated to the general area.
-      </p>
+      <h3 class="pt-3">Skills used/learned</h3>
+        <ul>
+          <li>Robot Operating System (ROS)</li>
+          <li>Mechanical design</li>
+          <li>Circuit design & power management</li>
+          <li>System integration & testing</li>
+          <li>Robot navigation strategies and sensor</li>
+        </ul>
 
-      <div class="imgright">
-        <img
-          src="objectdetection.png"
-          width="400"
-        />
-      </div>
+        <div class="py-4"></div>
 
-      <p>
-        To do this, we used a Zed stereo camera for object detection and
-        localization. A Faster RCNN algorithm trained on the Open Images dataset
-        from Google, augmented with our own target images, is used to recognize
-        and categorize objects.
-      </p>
-      
-      <p>
-        For <strong>Disinfection</strong>, to eliminate MRSA and other bacterium, we deployed a combined
-        disinfection approach, using both commercial disinfectant spray delivered through a peristaltic
-        pump and an electronically controlled sprayer, as well
-        as a UVC LED array emitting 250-260 nm wavelength UV light for
-        disinfection to deactivate bacterial DNA.
-      </p>
-      
-      <p>
-        To ensure safety, the entire disinfection system is contained within a
-        disinfection cone, mounted on a 5-DoF robotic arm. The disinfectant
-        sprayer is placed at the base of the cone, and the UVC LEDs are radially
-        positioned around the cone. The cone itself is reflective on the inside
-        to maximize the amount of UVC delivered to the object surface.
-      </p>
+      <button class="accordion">
+        <h3 class="acc">Additional Project Details</h1>
+      </button>
 
-      <p>
-        Ultimately, we were able to develop a prototype that was able to
-        navigate in a controlled environment, identify a subset of target
-        objects, and perform the disinfection routine.
-      </p>
+      <section class="panel">
+        <p class="pt-2">
+          The robotic system is mainly divided into three main operational
+          subsystems:
+          <strong>Navigation, Detection, Disinfection. </strong>Robot operation
+          is implemented through ROS (Robot Operating System).
+        </p>
 
-    </section>
+        <div class="imgright">
+          <img src="DWA.png" width="200" />
+        </div>
+        <p>
+          For <strong>Navigation</strong>, the robot relies on a LiDAR and SLAM
+          to navigate in a dynamic environment like that of a healthcare
+          facility. We used a
+          <a href="https://www.robotis.us/turtlebot-3-waffle-pi/"
+            >Robotis TurtleBot3 Waffle</a
+          >
+          as our base robot chassis.
+        </p>
+
+        <p>
+          For <strong>Detection</strong>, we want the robot to be able to
+          identify, categorize, and localize disinfection targets (in our
+          prototype setup: doorknobs and light-switches) within a specified ROI,
+          after the robot has navigated to the general area.
+        </p>
+
+        <div class="imgright">
+          <img src="objectdetection.png" width="400" />
+        </div>
+
+        <p>
+          To do this, we used a Zed stereo camera for object detection and
+          localization. A Faster RCNN algorithm trained on the Open Images
+          dataset from Google, augmented with our own target images, is used to
+          recognize and categorize objects.
+        </p>
+
+        <p>
+          For <strong>Disinfection</strong>, to eliminate MRSA and other
+          bacterium, we deployed a combined disinfection approach, using both
+          commercial disinfectant spray delivered through a peristaltic pump and
+          an electronically controlled sprayer, as well as a UVC LED array
+          emitting 250-260 nm wavelength UV light for disinfection to deactivate
+          bacterial DNA.
+        </p>
+
+        <p>
+          To ensure safety, the entire disinfection system is contained within a
+          disinfection cone, mounted on a 5-DoF robotic arm. The disinfectant
+          sprayer is placed at the base of the cone, and the UVC LEDs are
+          radially positioned around the cone. The cone itself is reflective on
+          the inside to maximize the amount of UVC delivered to the object
+          surface.
+        </p>
+
+      </section>
     </div>
-    <footer>
-  </footer>
-    
+    <footer></footer>
   </body>
-  <script src="../../js/subpage.js"></script>
 </html>

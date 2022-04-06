@@ -7,15 +7,21 @@ Lighter Grey: #DCE1E3
 */
 
 a {
-    text-decoration: underline;
-    color: #004E7C;
-    font-weight: bold;
+    text-decoration: underline !important;
+    color: #004E7C !important;
+    font-weight: bold !important;
+}
+
+.pagetitle {
+    font-size: 40px;
+    font-weight: bold !important;
+    color: white !important;
 }
 
 body {
     position: relative;
     margin: 0 0 0 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     background-color: #F0F0F0;
     text-align: justify;
     text-justify: inter-word;
@@ -27,21 +33,10 @@ body {
   }
 
 .main {
-    width: 55%;
-    max-width: 1500px !important;
-    margin: 40px auto !important;
-    margin-top: 20px !important;
     font-size: 20px;
 }
 
-@media (min-width: 1200px) {
-    .main {
-        width: 1100px !important;
-    }
-    .sitenavbar {
-        width: 1100px !important;
-    }
-}
+
 
 li {
     margin-top: 5px;
@@ -118,17 +113,7 @@ footer {
 div.sitenav, div.footer {
     background-color: #004E7C;
     opacity: 0.9;
-    padding-top: 30px;
-    padding-bottom: 18px;
 }
-
-/*
-div.sitenav {
-    display: flex;
-    align-self: flex-end;
-    justify-content: center;
-}
-*/
 
 .gif-gallery {
     display: flex;
@@ -152,13 +137,9 @@ img {
     margin: auto;
 }
 
-#pagetitle, .navtext, footer, .landingnav {
-    color: white;
-    font-weight: 500;
-}
-
-#pagetitle, div.nav{
-    width: 100%;
+.navtext, footer, .landingnav {
+    color: white !important;
+    font-weight: 500 !important;
 }
 
 .navtext{
@@ -214,9 +195,8 @@ div.footer a:hover {
     opacity: 0.3;
 }
 
-
 .nav-link {
-    margin-right: 30px;
+    padding-left: 0 !important;
 }
 
 /* Style the buttons that are used to open and close the accordion panel */
@@ -308,14 +288,14 @@ div.footer a:hover {
 #expanded > div {
     text-align: center;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     opacity: 0;
     border-radius: 0 0 20px 20px;
 }
 
 #item1 { 
     grid-area: item1; 
-    background-color: #c55a50 !important;
+    background-color: #d68b84 !important;
 }
 #item2 { 
     grid-area: item2; 
@@ -331,7 +311,7 @@ div.footer a:hover {
 }
 
 #item1expanded { 
-    background-color: #c55a50 !important;
+    background-color: #d68b84 !important;
 }
 #item2expanded { 
     background-color: #99b8ca !important;
@@ -353,13 +333,7 @@ div.footer a:hover {
 
 .expanded-item {
     height: auto;
-    width: 100%;
-    /*
-    transition: opacity 0.25s ease-out;
-    */
     position: absolute;
-    top: 0;
-    left: 0;
 }
 
 div.preview-center {
@@ -407,8 +381,6 @@ div.preview-center {
 
 .expanded-title, .expanded-subtitle, .expanded-link {
     text-align: left;
-    padding-left: 20px;
-    padding-right: 100px;
 }
 
 .preview-subtitle {
@@ -442,7 +414,7 @@ div.preview-center {
 .expanded-link {
     font-weight: bold;
     margin-top: 15px;
-    font-size: 30px;
+    font-size: 25px;
     text-decoration: underline 2px solid;
 }
 
@@ -456,4 +428,34 @@ div.preview-center {
 
 .blue-header {
     color: #004E7C;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold !important;
+}
+
+.list-img {
+    max-height: 225px !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .main {
+        font-size: 15px;
+    }
+
+    .navtext{
+        font-size: 15px;
+        margin-bottom: 5px;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    .pagetitle {
+        font-size:30px;
+        padding-bottom: 5px;
+    }
+
+    .hideonmobile {
+        display: none !important;
+    }
 }

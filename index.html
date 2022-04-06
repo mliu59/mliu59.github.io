@@ -10,8 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Miles Liu" />
 
-    <script src="js/header.js"></script>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
@@ -20,60 +18,51 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
       rel="stylesheet"
     />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script defer src="js/landing.js"></script>
+    <script defer src="js/accordion.js"></script>
   </head>
 
   <body>
     <header>
-      <div class="sitenav" id="sitenav"></div>
-      <!--
-      <script>
-        generateHeader(
-          (navSize = "25px"),
-          (titleSize = "80px"),
-          (width = "55%"),
-          (margin = "45px auto"),
-          (title = "MILES LIU")
-        );
-      </script>
-      -->
-      <script>
-        generateHeader();
-      </script>
+      <div class="sitenav pb-2 pt-4" id="sitenav">
+        <div class="container-xl">
+          <div class="pagetitle">MILES LIU</div>
+          <div class="nav">
+              <a class="nav-link navtext" href="https://mliu59.github.io/">HOME</a>
+              <a class="nav-link navtext" href="https://mliu59.github.io/projects">PROJECTS & WORK EXPERIENCE</a>
+              <a class="nav-link navtext" href="mailto:mliu59@jhu.edu">CONTACT</a>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <div class="main" style="width: 55%">
-      <section style="margin-top: 60px">
+    <div class="main container-xl">
+      <section class="my-5">
         <div class="imgright">
           <img src="assets/ML.png" width="200" />
         </div>
 
         <p>
-          Hello! My name is Miles Liu. I recently graduated from Johns Hopkins
-          University with a B.S. in Mechanical Engineering, and I am currently
-          working towards a Master of Science in Engineering in Robotics at the
-          <a href="https://lcsr.jhu.edu/"
-            >JHU Laboratory for Computational and Sensory Robotics</a
-          >, expecting to graduate in 2022.
+          Hello! I'm Miles Liu, a current
+          Robotics Master's student at Johns Hopkins University, expecting to graduate in Summer 2022.
+          I currently work as an Engineering Consultant with <a href="https://www.theclearmask.com/">ClearMask, LLC</a>.
         </p>
         <p>
-          I currently work as an Engineering Associate with the amazing team at
-          the startup company
-          <a href="https://www.theclearmask.com/">ClearMask, LLC</a>, where my
-          main responsibilities include development, testing, and maintenance of
-          new products, external webpages, and internal digital data and
-          operational platforms.
-        </p>
-        <p>
-          While you are here, check out this game I've been working on with my
-          friends: <a href="https://wikispeedruns.com/">Wikispeedruns</a>.
+          Check out this game I've been working on: <a href="https://wikispeedruns.com/">Wikispeedruns</a>.
         </p>
       </section>
 
-      <div id="pagetitle" style="margin-top: 60px; margin-bottom: 25px">
+      <div class="pagetitle my-3">
         <div
           style="
             color: black;
-            font-size: 40px;
+            font-size: 30px;
             font-weight: bold;
             margin-right: 50px;
           "
@@ -93,7 +82,7 @@
           <a href="projects"> HERE </a>
         </div>
       </div>
-      <div id="gallery-frame">
+      <div id="gallery-frame" class="hideonmobile">
         <div id="preview-frame-outer">
           <div id="preview-frame">
             <div class="preview-inner" id="item1">
@@ -116,84 +105,80 @@
               <div class="preview-center">
                 <div class="preview-title">Wikispeedruns</div>
                 <div class="preview-subtitle">
-                  Online competitive browser game based on Wikipedia
-                </div>
-              </div>
-            </div>
-            <div class="preview-inner" id="item4">
-              <div class="preview-center">
-                <div class="preview-title">DECON</div>
-                <div class="preview-subtitle">
-                  Autonomous disinfection robot for hospitals
+                  Online competitive Wikipedia surfing game
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="expanded">
-          <div class="expanded-item" id="item1expanded">
-            <div class="imgleft" style="width:30%; margin-left:10%;margin-right:10%;margin-top:60px">
-              <img src="projects/sanaria/robot.jpg" style="border: 2px solid black; width:100%"/>
-            </div>
-            <div class="expanded-inner">
-              <div class="expanded-center">
-                <div class="expanded-title">
-                  Sanaria robot - automation of mosquito salivary gland
-                  collection
-                </div>
-                <div class="expanded-subtitle">
-                  <p>
-                    Sanaria Inc.'s malaria vaccine has the potential to eliminate
-                    one of the world's deadliest diseases. However, the vaccine
-                    relies on mosquito salivary gland for its production, and the
-                    current extract process is completely manual and highly labor
-                    intensive.
-                  </p>
-                  <p>
-                    This project aims to build an automated mosquito dissection robot platform that can automate this process, to improve overall vaccine production efficiency.
-                  </p>
-                </div>
-                <div class="expanded-link">
-                  <a href="projects/sanaria/">Read More</a>
-                </div>
+        <div id="expanded" class="pb-5">
+          <div class="expanded-item container" id="item1expanded">
+            <div class="row py-4 px-4">
+              <div class="col-lg-auto">
+                <img src="projects/sanaria/robot.jpg" style="border: 2px solid black;" width="300"/>
+              </div>
+              <div class="col-lg px-4">
+                  <div class="expanded-title">
+                    Sanaria robot - automation of mosquito salivary gland
+                    collection
+                  </div>
+                  <div class="expanded-subtitle">
+                    <p>
+                      Sanaria Inc.'s malaria vaccine has the potential to eliminate
+                      one of the world's deadliest diseases. However, the vaccine
+                      relies on mosquito salivary gland for its production, and the
+                      current extract process is completely manual and highly labor
+                      intensive.
+                    </p>
+                    <p>
+                      This project aims to build an automated mosquito dissection robot platform that can automate this process, to improve overall vaccine production efficiency.
+                    </p>
+                  </div>
+                  <div class="expanded-link">
+                    <a href="projects/sanaria/">Read More</a>
+                  </div>
               </div>
             </div>
           </div>
-          <div class="expanded-item" id="item2expanded">
-            <div class="imgleft" style="width:30%; margin-left:10%;margin-right:10%;margin-top:45px">
-              <img src="projects/ocean21/controlledTug.gif" style="border: 2px solid black; width:100%"/>
-              <img src="projects/ocean21/beach.png" style="border: 2px solid black; width:100%"/>
-            </div>
-            <div class="expanded-inner">
-              <div class="expanded-center">
-                <div class="expanded-title">
-                  OCEAN21 - Autonomous surface vehicle for underwater ROV
+          <div class="expanded-item container" id="item2expanded">
+            <div class="row pt-4 px-4 mx-4">
+              <div class="col-lg px-4">
+                  <div class="expanded-title">
+                    OCEAN21 - Autonomous surface vehicle for underwater ROV
                   testing
-                </div>
-                <div class="expanded-subtitle">
-                  <p>
-                    Small underwater ROVs (Remote Operated Vehicle) communicate
-                    with ground control through a long fiber-optic cable, which
-                    can be costly to use during testing.
-                  </p>
-                  <p>
-                    Our prototype is an autonomous surface vehicle that follows
-                    the ROV to facilitate wireless to wired communication
-                    without introducing additional drag to the ROV system.
-                  </p>
-                </div>
-                <div class="expanded-link">
-                  <a href="projects/ocean21/">Read More</a>
-                </div>
+                  </div>
+                  <div class="expanded-subtitle">
+                    <p>
+                      Small underwater ROVs (Remote Operated Vehicle) communicate
+                      with ground control through a long fiber-optic cable, which
+                      can be costly to use during testing.
+                    </p>
+                    <p>
+                      Our prototype is an autonomous surface vehicle that follows
+                      the ROV to facilitate wireless to wired communication
+                      without introducing additional drag to the ROV system.
+                    </p>
+                  </div>
+                  <div class="expanded-link">
+                    <a href="projects/ocean21/">Read More</a>
+                  </div>
+              </div>
+            </div>
+            <div class="row px-4 pb-4 pt-3 justify-content-md-center">
+              <div class="col-sm-auto">
+                <img src="projects/ocean21/controlledTug.gif" height="225"/>
+              </div>
+              <div class="col-sm-auto">
+                <img src="projects/ocean21/beach.png" height="225"/>
               </div>
             </div>
           </div>
-          <div class="expanded-item" id="item3expanded">
-            <div class="imgleft" style="width:25%; margin-left:12.5%;margin-right:12.5%;margin-top:80px">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1280px-Wikipedia-logo-v2-en.svg.png" style="width:100%"/>
-            </div>
-            <div class="expanded-inner">
-              <div class="expanded-center">
+          <div class="expanded-item container" id="item3expanded">
+            <div class="row py-4 px-4">
+              <div class="col-lg-auto">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1280px-Wikipedia-logo-v2-en.svg.png" width="300"/>
+              </div>
+              <div class="col-lg px-4">
                 <div class="expanded-title">
                   Wikispeedruns - Wikipedia based online competitive browser
                   game
@@ -214,39 +199,9 @@
               </div>
             </div>
           </div>
-          <div class="expanded-item" id="item4expanded">
-            <div class="imgleft" style="width:30%; margin-left:10%;margin-right:10%;margin-top:55px">
-              <img src="projects/decon/croppedRobot.png" style="border: 2px solid black; width:100%"/>
-            </div>
-            <div class="expanded-inner">
-              <div class="expanded-center">
-                <div class="expanded-title">
-                  DECON - Autonomous disinfection robot for hospitals
-                </div>
-                <div class="expanded-subtitle">
-                  <p>
-                    Healthcare Associated Infections (HAIs) pose serious health
-                    risks for patients in healthcare facilities, but can be
-                    prevented through routine disinfection and good hygiene
-                    protocols.
-                  </p>
-                  <p>
-                    Our solution for further decreasing infection rates is with
-                    an autonomous robot platform that disinfects contamination
-                    hot-spots in healthcare facilities without disrupting
-                    existing workflow.
-                  </p>
-                </div>
-                <div class="expanded-link">
-                  <a href="projects/decon/">Read More</a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </body>
 
-  <script src="js/landing.js"></script>
 </html>
