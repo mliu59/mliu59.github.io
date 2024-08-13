@@ -16,6 +16,7 @@ a {
     font-size: 40px;
     font-weight: bold !important;
     color: white !important;
+    text-align:center;
 }
 
 body {
@@ -466,4 +467,10 @@ h1, h2, h3, h4, h5, h6 {
     .main-subtitle {
         font-size: 15px;
     }
+}
+
+.social-menu {
+    display: flex;
+    list-style-type: none;
+    font-size: 40px;
 }
