@@ -1,0 +1,42 @@
+---
+import { Image } from "astro:assets";
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import Link from "@components/Link.astro";
+import { HOME } from "@consts";
+import portrait from "../assets/ML.jpg";
+---
+
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <Container>
+    <h4 class="animate font-semibold text-[#353535] dark:text-[#FFFFFF]">
+      Hi, I'm Miles <span class="text-xl"></span>
+    </h4>
+    <section>
+      <article class="space-y-4 flex flex-col md:block">
+        <Image
+          src={portrait}
+          alt="Miles Liu"
+          width={220}
+          class="animate order-last block mx-auto my-6 rounded-lg md:order-none md:float-right md:mx-0 md:my-0 md:ml-4 md:mb-2"
+        />
+        <p class="animate">
+          I'm a Systems Engineer on the Advanced Product Development team at
+          <Link href="https://www.intuitive.com/en-us" external>Intuitive Surgical</Link>
+        </p>
+        <p class="animate">
+          I graduated from Johns Hopkins University with an M.S.E. in Robotics
+          (focus in Medical Robotics, 2022) and a B.S. in Mechanical Engineering
+          (2021), where I worked as a Graduate Research Assistant at the
+          <Link href="https://ciis.lcsr.jhu.edu/doku.php" external>
+            Computer Integrated Interventional Systems (CIIS) Laboratory
+          </Link>
+        </p>
+        <p class="animate">
+          Check out a game I've been working on:
+          <Link href="https://wikispeedruns.com/" external>Wikispeedruns</Link>
+        </p>
+      </article>
+    </section>
+  </Container>
+</PageLayout>

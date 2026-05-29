@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Palette:
+  --eerie-black: #353535
+  --genoa (teal): #3C6E71
+  --white:        #FFFFFF
+  --pinball (light grey): #D9D9D9
+  --indigo-dye:   #284B63
+*/
+
+html {
+  overflow-y: scroll;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html,
+body {
+  @apply size-full;
+}
+
+body {
+  @apply font-sans antialiased text-base md:text-lg leading-snug;
+  @apply flex flex-col;
+  @apply bg-[#D9D9D9] dark:bg-[#353535];
+  @apply text-[#353535] dark:text-[#D9D9D9];
+}
+
+header {
+  @apply fixed top-0 left-0 right-0 z-50 py-2 md:py-5;
+  @apply bg-[#284B63] text-[#FFFFFF];
+  @apply dark:bg-[#284B63] dark:text-[#FFFFFF];
+  @apply backdrop-blur-sm saturate-200;
+}
+
+main {
+  @apply flex-1 py-16 md:py-32;
+}
+
+footer {
+  @apply py-5 text-sm md:text-base;
+}
+
+article {
+  @apply max-w-full prose md:prose-lg dark:prose-invert prose-img:mx-auto prose-img:my-auto;
+  @apply prose-headings:font-semibold prose-p:leading-snug prose-headings:leading-tight;
+  @apply prose-headings:text-[#353535] prose-headings:dark:text-[#FFFFFF];
+}
+
+@layer utilities {
+  article a {
+    @apply font-sans font-semibold text-[#3C6E71] dark:text-current underline underline-offset-2;
+    @apply decoration-[#3C6E71]/40 dark:decoration-[#D9D9D9]/30;
+    @apply transition-colors duration-300 ease-in-out;
+  }
+  article a:hover {
+    @apply text-[#284B63] dark:text-[#FFFFFF];
+    @apply decoration-[#284B63]/60 dark:decoration-[#FFFFFF]/50;
+  }
+}
+
+.animate {
+  @apply opacity-0 translate-y-3;
+  @apply transition-all duration-700 ease-out;
+}
+
+.animate.show {
+  @apply opacity-100 translate-y-0;
+}
+
+html #back-to-top {
+  @apply opacity-0 pointer-events-none;
+}
+
+html.scrolled #back-to-top {
+  @apply opacity-100 pointer-events-auto;
+}
