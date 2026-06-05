@@ -1,10 +1,17 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import Link from "@components/Link.astro";
-import { HOME } from "@consts";
+import PostCard from "@components/PostCard.astro";
+import { HOME, SITE } from "@consts";
 import portrait from "../assets/ML.jpg";
+
+const latestPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -38,5 +45,27 @@ import portrait from "../assets/ML.jpg";
         </p>
       </article>
     </section>
+
+    {
+      latestPosts.length > 0 && (
+        <section class="mt-24">
+          <div class="animate flex items-baseline justify-between">
+            <h4 class="font-semibold text-[#353535] dark:text-[#FFFFFF]">
+              Latest posts
+            </h4>
+            <Link href="/blog" underline={false}>
+              <span class="text-sm text-[#3C6E71] dark:text-[#9bbfc1]">
+                All posts &rarr;
+              </span>
+            </Link>
+          </div>
+          <div class="animate mt-4">
+            {latestPosts.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        </section>
+      )
+    }
   </Container>
 </PageLayout>

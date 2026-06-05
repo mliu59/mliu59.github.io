@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@components/FormattedDate.astro";
+import { postPath } from "@lib/utils";
+import { getProject } from "@lib/projects";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  showProject?: boolean;
+  class?: string;
+}
+
+const { post, showProject = true, class: className = "" } = Astro.props;
+const project = getProject(post.id);
+---
+
+<a
+  href={postPath(post.id)}
+  data-project={project.slug}
+  class={`group block py-3 border-t border-current/10 transition-opacity hover:opacity-70 ${className}`}
+>
+  <div class="flex items-baseline justify-between gap-4">
+    <span class="font-semibold text-[#284B63] dark:text-[#FFFFFF]">
+      {post.data.title}
+    </span>
+    <span class="shrink-0 text-sm opacity-70 tabular-nums">
+      <FormattedDate date={post.data.date} />
+    </span>
+  </div>
+  {showProject && (
+    <span class="mt-0.5 inline-block text-sm text-[#3C6E71] dark:text-[#9bbfc1]">
+      {project.name}
+    </span>
+  )}
+</a>

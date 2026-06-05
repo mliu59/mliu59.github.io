@@ -11,7 +11,7 @@ export const SITE: Site = {
 export const HOME: Metadata = {
   TITLE: "Home",
   DESCRIPTION:
-    "Miles Liu — Systems Engineer at Intuitive Surgical. Robotics, software, and side projects.",
+    "Miles Liu — Systems Engineer at Intuitive Surgical.",
 };
 
 export const BLOG: Metadata = {
@@ -27,6 +27,13 @@ export const WORK: Metadata = {
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
   DESCRIPTION: "Things I've built — links to repos and demos.",
+};
+
+// Optional display-name overrides for blog project folders.
+// Key = folder name under src/content/blog, value = how it appears in the UI.
+// Anything not listed is auto-humanized (e.g. "medical-robotics" -> "Medical Robotics").
+export const PROJECT_NAMES: Record<string, string> = {
+  "kartogen": "Kartogen",
 };
 
 export const SOCIALS: Socials = [

@@ -32,7 +32,9 @@ body {
   @apply text-[#353535] dark:text-[#D9D9D9];
 }
 
-header {
+/* Site nav header only — scoped to the direct body child so it doesn't also
+   style the <header> the blog post template uses for its title block. */
+body > header {
   @apply fixed top-0 left-0 right-0 z-50 py-2 md:py-5;
   @apply bg-[#284B63] text-[#FFFFFF];
   @apply dark:bg-[#284B63] dark:text-[#FFFFFF];
@@ -45,12 +47,30 @@ main {
 
 footer {
   @apply py-5 text-sm md:text-base;
+  @apply md:mb-12;
 }
 
 article {
   @apply max-w-full prose md:prose-lg dark:prose-invert prose-img:mx-auto prose-img:my-auto;
+  /* Default display cap so a tall image never dominates the page. Per-image
+     overrides via markdown `{h=… w=…}` (remarkImageAttrs) set an inline style,
+     which wins over this. Display only — does not change downloaded bytes. */
+  @apply prose-img:max-h-[540px] prose-img:w-auto;
   @apply prose-headings:font-semibold prose-p:leading-snug prose-headings:leading-tight;
   @apply prose-headings:text-[#353535] prose-headings:dark:text-[#FFFFFF];
+  /* In-content heading sizes — kept below the post title (text-3xl/4xl) so the
+     hierarchy reads title > section > subsection. */
+  @apply prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg;
+  /* Tighten bullets/numbers to match the snug paragraph rhythm instead of
+     Typography's loose 1.75 list line-height. */
+  @apply prose-li:leading-snug prose-li:my-1 prose-ul:my-4 prose-ol:my-4 prose-li:pl-1;
+  /* Bullet/number markers — Typography defaults to a near-invisible gray-300.
+     Use palette teal so they read against both backgrounds. */
+  @apply [--tw-prose-bullets:#3C6E71] [--tw-prose-counters:#3C6E71];
+  @apply dark:[--tw-prose-invert-bullets:#9bbfc1] dark:[--tw-prose-invert-counters:#9bbfc1];
+  /* Image captions (figcaption generated from each image's alt text). */
+  @apply prose-figure:my-8;
+  @apply prose-figcaption:mt-3 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:italic;
 }
 
 @layer utilities {
@@ -63,6 +83,22 @@ article {
     @apply text-[#284B63] dark:text-[#FFFFFF];
     @apply decoration-[#284B63]/60 dark:decoration-[#FFFFFF]/50;
   }
+
+  /* Inline code — drop Typography's literal backtick quotes and render it as a
+     subtle pill that sits inside the body text instead of escaped `like this`. */
+  article :not(pre) > code::before,
+  article :not(pre) > code::after {
+    content: none;
+  }
+  article :not(pre) > code {
+    @apply font-medium text-[0.9em] rounded px-1.5 py-0.5;
+    @apply bg-[#3C6E71]/10 text-[#284B63];
+    @apply dark:bg-[#FFFFFF]/10 dark:text-[#9bbfc1];
+  }
+}
+
+.filter-btn[aria-pressed="true"] {
+  @apply bg-[#284B63] text-[#FFFFFF] border-[#284B63] font-semibold;
 }
 
 .animate {

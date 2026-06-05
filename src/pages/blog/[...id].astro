@@ -1,0 +1,64 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { postPath } from "@lib/utils";
+import { getProject } from "@lib/projects";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")).filter((p) => !p.data.draft);
+  return posts.map((post) => ({
+    params: { id: postPath(post.id).replace(/^\/blog\//, "") },
+    props: { post },
+  }));
+}
+
+type Props = { post: CollectionEntry<"blog"> };
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const project = getProject(post.id);
+---
+
+<PageLayout title={post.data.title} description={post.data.description}>
+  <Container>
+    <div class="animate text-sm opacity-70">
+      <Link href="/blog" underline={false}>&larr; All posts</Link>
+    </div>
+
+    <article class="mt-6">
+      <header class="animate not-prose mb-8">
+        <h1 class="text-3xl md:text-4xl font-semibold text-[#353535] dark:text-[#FFFFFF]">
+          {post.data.title}
+        </h1>
+        <div class="mt-2 flex items-center gap-2 text-sm">
+          <span class="text-[#3C6E71] dark:text-[#9bbfc1]">{project.name}</span>
+          <span class="opacity-40">&middot;</span>
+          <span class="opacity-70"><FormattedDate date={post.data.date} /></span>
+        </div>
+      </header>
+
+      {
+        post.data.cover && (
+          <Image
+            src={post.data.cover}
+            alt={post.data.coverAlt ?? post.data.title}
+            class="animate mb-8 rounded-lg w-full"
+          />
+        )
+      }
+
+      <div class="animate">
+        <Content />
+      </div>
+    </article>
+
+    <div class="animate mt-12 text-sm opacity-70">
+      <Link href="/blog" underline={false}>&larr; All posts</Link>
+    </div>
+  </Container>
+</PageLayout>
