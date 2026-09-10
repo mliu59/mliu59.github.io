@@ -1,7 +1,7 @@
 ---
 title: "Kartogen!"
 description: "The beginnings and motivation for Kartogen, a pseudorandom realistic world generator."
-date: 2025-06-03
+date: 2026-06-03
 tags: ["kartogen"]
 ---
 
