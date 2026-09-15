@@ -6,7 +6,7 @@ import roboto400 from "@fontsource/roboto/files/roboto-latin-400-normal.woff2";
 import roboto600 from "@fontsource/roboto/files/roboto-latin-600-normal.woff2";
 
 import { ClientRouter } from "astro:transitions";
-import { SITE } from "@consts";
+import { SITE, GOATCOUNTER_CODE } from "@consts";
 
 interface Props {
   title: string;
@@ -15,6 +15,12 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// GoatCounter analytics: production builds only, and only once a site code is set.
+const goatcounterURL =
+  import.meta.env.PROD && GOATCOUNTER_CODE
+    ? `https://${GOATCOUNTER_CODE}.goatcounter.com/count`
+    : null;
 
 const { title, description, image } = Astro.props;
 const ogImage = image ? new URL(image, Astro.url).toString() : null;
@@ -176,3 +182,19 @@ function toggleTheme(dark) {
   document.addEventListener("astro:after-swap", () => init());
   preloadTheme();
 </script>
+
+{goatcounterURL && (
+  <>
+    <!-- GoatCounter (cookieless analytics). count.js records the initial page
+         load; the listener below records client-side navigations made by
+         Astro's ClientRouter, which count.js can't see on its own. -->
+    <script is:inline async src="https://gc.zgo.at/count.js" data-goatcounter={goatcounterURL}></script>
+    <script is:inline>
+      document.addEventListener("astro:after-swap", () => {
+        window.goatcounter?.count?.({
+          path: location.pathname + location.search + location.hash,
+        });
+      });
+    </script>
+  </>
+)}

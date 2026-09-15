@@ -54,3 +54,7 @@ export const SOCIALS: Socials = [
     HREF: "https://www.instagram.com/shaomaiz/",
   },
 ];
+
+// GoatCounter site code (the subdomain of your goatcounter.com dashboard).
+// Leave empty to disable analytics entirely; only loaded in production builds.
+export const GOATCOUNTER_CODE = "mliu59";
