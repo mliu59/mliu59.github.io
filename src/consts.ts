@@ -34,6 +34,7 @@ export const PROJECTS: Metadata = {
 // Anything not listed is auto-humanized (e.g. "medical-robotics" -> "Medical Robotics").
 export const PROJECT_NAMES: Record<string, string> = {
   "kartogen": "Kartogen",
+  "hexapod-rl-sim": "Hexapod RL Sim",
 };
 
 export const SOCIALS: Socials = [
