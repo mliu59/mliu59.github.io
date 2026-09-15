@@ -187,7 +187,12 @@ function toggleTheme(dark) {
   <>
     <!-- GoatCounter (cookieless analytics). count.js records the initial page
          load; the listener below records client-side navigations made by
-         Astro's ClientRouter, which count.js can't see on its own. -->
+         Astro's ClientRouter, which count.js can't see on its own. The endpoint
+         is set on window (not only the script tag) so it survives a head swap
+         to a page that lacks the tag, e.g. a stale cached copy. -->
+    <script define:vars={{ goatcounterURL }}>
+      window.goatcounter = Object.assign(window.goatcounter || {}, { endpoint: goatcounterURL });
+    </script>
     <script is:inline async src="https://gc.zgo.at/count.js" data-goatcounter={goatcounterURL}></script>
     <script is:inline>
       document.addEventListener("astro:after-swap", () => {
