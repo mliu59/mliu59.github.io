@@ -1,5 +1,5 @@
 ---
-title: "Spidertron - Learning to Train Hexapod Locomotion Using RL"
+title: "Spidertron: Learning to Train Hexapod Locomotion Using RL"
 description: "Findings from an exploratory RL locomotion project: a simulated hexapod, reward tuning churn, and broken physics."
 date: 2026-09-17
 tags: ["hexapod-rl-sim", "reinforcement-learning", "robotics"]
@@ -20,7 +20,7 @@ I've always loved the concept of a massive spidertron as a way of navigating com
 
 So the spidertron became the base design, with a couple of modifications. I reduced the leg count from 8 to 6 (I may increase it back later for more redundancy). With an eye toward possibly building a real robot someday, I opted to remove the original's telescoping lower leg, since a prismatic joint is a mechanical headache. Three joints per leg, eighteen in total. We can add another revolute joint for redundancy if it's ever needed. The robot is scaled down to be actuated by hobbyist servos. 
 
-![The six-legged spidertron model at its nominal stance](./spidertron_render.png)
+![The six-legged spidertron model](./spidertron_render.png)
 
 The baseline physical assumptions are deliberately grounded in that hobby hardware: inertias estimated from vendor-provided STEP files, torque, range, and power limits derived from the servo spec sheets, and no excess payload for this first iteration.
 

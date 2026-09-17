@@ -199,6 +199,9 @@ function toggleTheme(dark) {
         window.goatcounter?.count?.({
           path: location.pathname + location.search + location.hash,
         });
+        // Re-attach click handlers for data-goatcounter-click elements;
+        // count.js binds them at load and the swap replaces those nodes.
+        window.goatcounter?.bind_events?.();
       });
     </script>
   </>
