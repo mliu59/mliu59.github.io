@@ -8,7 +8,7 @@ draft: true
 Repo link: [github.com/mliu59/hexapod-rl-sim](https://github.com/mliu59/hexapod-rl-sim)
 
 
-# Goals
+## Goals
 
 exploratory project
 I would like to explore and first hand try training locomotion on a robot using RL techniques and be able to watch it run around in sim. 
@@ -94,7 +94,7 @@ I accepted this for this initial flat ground walk task. For this morphology on f
 - gliding detection (related to gliding physics exploit)
 
 
-# What's next
+## What's next
 
 Immediate next steps:
 - design factors that need to be optimized in real robots:
@@ -116,7 +116,7 @@ once we have a working "robot" in sim, there are some other fun problems that we
 - path finding
 - multi agent RL (multiple agents coordinating to do the same task. e.g. forming a mountain of bots so that one robot can climb on it and complete a task, like in World War Z)
 
-# some references (do not need to be cited)
+## some references (do not need to be cited)
 
 - LocoFormer (Skild AI), generalized omnibodied locomotion training: https://arxiv.org/abs/2509.23745
 
