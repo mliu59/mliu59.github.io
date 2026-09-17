@@ -8,9 +8,9 @@ draft: true
 
 Repo link: [github.com/mliu59/hexapod-rl-sim](https://github.com/mliu59/hexapod-rl-sim)
 
-I've wanted to try training robot locomotion with reinforcement learning for a while now. Not just to read about it, but to do it firsthand: build a robot model, drop it into a simulator, and watch it learn to run around. This project is that. It's deliberately exploratory, and the robot is mostly imaginary, so none of the numbers matter on an absolute scale. What I was after was the experience and the lessons, and it delivered plenty of both.
+This is an exploratory project: I wanted to try training robot locomotion with reinforcement learning firsthand, and watch the robot run around in sim.
 
-The goal for the first milestone: have a robot run around on flat terrain, following a target vector (heading and speed) that I can change on the fly.
+The goal for the first milestone: have the robot run around on flat terrain, following a target vector (heading and speed).
 
 ## The tool stack
 
