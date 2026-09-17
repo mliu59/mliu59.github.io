@@ -67,7 +67,7 @@ I applied mitigations in the physics rather than the reward function, since patc
 
 Then it was back to the main milestone task of tracking a full velocity vector, heading and speed. For this task I took off the gait-specific prescriptive rewards, kept the physics exploit fixes, and let it train.
 
-Across multiple trials, random exploration was always able to produce *some* gait that generally tracked the target, but it often relied on only four or five legs to jog around, with the spares held off the ground or dragged along decoratively.
+Across multiple trials, random exploration was always able to produce *some* gait that generally tracked the target, but it often relied on only four or five legs to jog around, with the spares held off the ground or dragged along decoratively. The robot's motion is still quite wobbly, which will be a target to address in the next iteration.
 
 ![Walk policy from fixed camera](./demo_fixed_cam.gif)
 
