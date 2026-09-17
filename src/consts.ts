@@ -3,7 +3,7 @@ import type { Site, Metadata, Socials } from "@types";
 export const SITE: Site = {
   NAME: "Miles Liu",
   EMAIL: "liumai1999@hotmail.com",
-  NUM_POSTS_ON_HOMEPAGE: 3,
+  NUM_POSTS_ON_HOMEPAGE: 5,
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
@@ -34,6 +34,7 @@ export const PROJECTS: Metadata = {
 // Anything not listed is auto-humanized (e.g. "medical-robotics" -> "Medical Robotics").
 export const PROJECT_NAMES: Record<string, string> = {
   "kartogen": "Kartogen",
+  "hexapod-rl-sim": "Hexapod RL Sim",
 };
 
 export const SOCIALS: Socials = [
