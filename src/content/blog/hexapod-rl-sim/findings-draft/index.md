@@ -35,21 +35,11 @@ I went with NVIDIA's Isaac Lab stack, for a few reasons:
 
 For the algorithm, PPO was the obvious starting point: on-policy, online, and the default workhorse of this entire subfield. The reward structure follows from the task. Since the objective is velocity tracking, the reward is dense (a tracking score on every tick, rather than a sparse "you made it" bonus), and the policy is goal-conditioned — the setpoints (heading, speed, body height) are part of the observation, so one trained network can follow whatever commands you feed it. The observations are blind proprioception: joint states, body motion, foot contacts, and the commands. No cameras, no terrain maps.
 
-## Crawling before walking
-
-The first tasks were deliberately trivial: stand still, then hold the body at a commanded height while I move the setpoint around. These worked almost anticlimactically well — a policy that smoothly squats and rises to track a height staircase, settling within a fingernail of the target.
-
-![The height-tracking policy following a staircase of height setpoints](./height_staircase_spidertron.gif)
-
-I mention them mostly because they set a trap: they made this look easy. The interesting part of the project starts with the walk task, where "easy" ended abruptly.
-
-Also, for a bit of humility, here's what an early training misconfiguration looks like. Every robot in every environment, collapsing on its face at spawn, four thousand times in parallel:
-
-![An early misconfigured run collapsing at spawn](./m1_collapse_spidertron.gif)
+The rest of this post is organized around the three things this project actually taught me about: reward engineering, physics engine exploits, and where gait patterns come from.
 
 ## Reward engineering and its consequences
 
-The walk task ran through roughly ten versions, and nearly every iteration was a lesson in how an optimizer treats your reward function: not as a description of what you want, but as a contract to be exploited. PPO is a lawyer. Some highlights from the loophole parade:
+Nearly every iteration of the walk task was a lesson in how an optimizer treats your reward function: not as a description of what you want, but as a contract to be exploited. PPO is a lawyer. Some highlights from the loophole parade:
 
 **The robot that refused to turn.** The walk command asks the robot to face a target heading and move at a target speed, and I'd coupled them: the speed demand scaled down when the robot was facing the wrong way (you shouldn't be charging full speed at ninety degrees off-course). The policy read that contract carefully and found the loophole — if you *never* turn toward the target, the speed demand stays near zero, and you can collect the "perfectly tracking my (zero) speed target" reward while standing still. It gave up only the small heading reward and avoided every cost of actually stepping. The training curve, meanwhile, climbed steadily. A rising reward curve tells you the policy is getting better at earning reward. It tells you nothing about whether it's doing the task.
 
@@ -59,11 +49,9 @@ The walk task ran through roughly ten versions, and nearly every iteration was a
 
 ![The tripod-hop policy: pogoing on a subset of legs while others stay curled](./walk_v8_tripod_hop_spidertron.gif)
 
-The way out was not more cleverness in the reward function. It was, in order: make smoothness non-negotiable (penalize the thrash directly, so the policy has to learn real trajectories before it can learn anything else), strip the task down to isolate locomotion (fixed command, no distractions) and then, crucially, **retrain from scratch under the full set of constraints rather than bolting constraints onto a converged policy**. That last one was the single most load-bearing lesson of the arc: constraints compound when they're present from the first gradient step, and merely trade against each other when retrofitted. Every attempt to patch a converged policy plateaued; a fresh run under the identical reward set snapped into a clean alternating-tripod gait almost immediately, and better than the patched runs ever got at a fraction of the compute.
+**Penalties are walls at one weight and bills at another.** Style penalties — body wobble, in my case — turned out to have a surprisingly narrow useful range. At the weights intuition suggested, the policy decided the safest way to avoid wobbling was to never walk at all: any stability metric can be satisfied by refusing the task. At a fraction of those weights, the same terms became a fair bill that genuinely bought cleaner walking. And choosing *which axes* to penalize beat weight-tuning entirely: exempting yaw from the wobble price — because yawing is not wobble, yawing is literally the turning task — fixed turning outright where no amount of weight fiddling had.
 
-![The from-scratch run walking with a clean alternating-tripod gait](./march_v6_spidertron.gif)
-
-## Breaking the simulator
+## Physics engine exploits
 
 Along the way, a question kept nagging: how much of this hand-built gait shaping is actually *necessary*? Would a decent gait emerge from just "go fast and don't fall"? So I ran the experiment — strip every gait-related term, keep speed and survival, and let PPO loose.
 
@@ -85,13 +73,19 @@ This layer also produced my favorite meta-lesson of the project. My initial evid
 
 ![The exploit-free free-run optimum: a legal but unstructured sliding shuffle](./march_free3_spidertron.gif)
 
-So on flat ground, **gait structure does not emerge from speed pressure**. Every visually-pleasing gait this project produced was purchased with an explicit prior. The same constraint suite that produced the neat tripod walk also produced, when asked for maximum speed instead of a setpoint, a genuinely quick tripod-flavored run — nearly an order of magnitude faster than the walking setpoint, with the gait structure smoothly degrading as speed rose. The constraints define a whole spectrum; the free optimizer, given nothing, finds the bottom of it.
-
-![The max-speed run under the full gait constraint suite](./march_max_spidertron.gif)
-
 The distilled takeaway, and the design rule the repo now lives by: **physics enforcement and reward shaping do different, non-overlapping jobs.** Physics guarantees there's nothing unphysical to exploit; rewards select the behavior you prefer among the physical ones. Every failure in this section came from confusing the two — using a reward term as a band-aid over a physics hole (fragile, and the optimizer *will* find the edge of the band-aid), or expecting realistic physics to induce style (it won't). And one operational corollary I'd underline for anyone doing this: put tripwires on your exploit metrics *during* training. The skating exploit ran for hours before a human noticed it in a rollout video; the monitoring that would have flagged it in minutes was trivial to add afterwards.
 
-A related finding on style, from a follow-up arc: penalties for body wobble act as *walls* at the weights that intuition suggests (the robot decides the safest way to avoid wobbling is to never walk — any stability metric can be satisfied by refusing the task), and as useful *bills* at a fraction of those weights. And choosing *which axes* to penalize beat weight-tuning entirely: exempting yaw from the wobble price — because yawing is not wobble, yawing is literally the turning task — fixed turning outright where no amount of weight fiddling had. Priced correctly, the wobble bill bought visibly cleaner walking: discrete strides instead of a slide.
+## Hexapod gait patterns
+
+Real hexapods — insects and robots alike — overwhelmingly converge on the alternating tripod gait: two sets of three legs (front and rear on one side, middle on the other) swinging in antiphase, so the body is always supported by a stable triangle. It's fast, statically stable, and geometrically natural for six legs. Going in, I half-expected some version of it to fall out of training on its own.
+
+It didn't — and the free-run experiment above explains why. On flat ground, nothing in "track the velocity and don't fall" *prefers* stepping over sliding, or coordinated phases over uncoordinated ones. A hexapod in particular has so much static stability to spare that it can afford gaits no biped or quadruped could get away with: shuffles, pogo-hops on a subset of legs, decorative legs that never touch down. The morphology that makes the tripod gait possible is the same morphology that makes it optional. Gait structure comes from the task priors you impose, not from speed pressure.
+
+So the tripod gait had to be asked for: rewards for phase opposition between the two leg triplets, for keeping every foot pulling its share of the load, and for swing durations matched to the plant's natural cadence. With those in place, a clean alternating tripod emerged — every leg cycling, the two triplets in crisp antiphase.
+
+![The trained policy walking with a clean alternating-tripod gait](./march_v6_spidertron.gif)
+
+The most load-bearing lesson of the arc, though, was about *how* those constraints get applied. Every attempt to retrofit gait constraints onto an already-converged policy plateaued: each new term traded against the previous ones, and the policy dragged its old habits along. Training fresh from scratch under the identical, complete reward set snapped into the tripod almost immediately, and reached coordination levels the retrofitted runs never touched, at a fraction of the compute. **Constraints compound when present from the first gradient step, and merely trade when bolted onto a converged policy.** If I keep one rule of thumb from this project, it's that one.
 
 ## Where it stands
 
