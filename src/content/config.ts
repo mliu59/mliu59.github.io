@@ -37,7 +37,6 @@ const projects = defineCollection({
       // Preview image, static or animated GIF. Place it next to index.md and
       // reference it relatively, e.g. thumbnail: ./thumbnail.gif
       thumbnail: image(),
-      thumbnailAlt: z.string().optional(),
       // Where the project card points. Internal ("/blog/...") or external
       // ("https://..."). Omit to use the generated detail page instead.
       link: z.string().optional(),

@@ -53,7 +53,7 @@ const slides = Array.from({ length: n * repeats }, (_, i) => ({
                 <div class="overflow-hidden rounded-sm bg-muted ring-1 ring-border">
                   <Image
                     src={project.data.thumbnail}
-                    alt={project.data.thumbnailAlt ?? project.data.title}
+                    alt={project.data.title}
                     width={640}
                     class="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />

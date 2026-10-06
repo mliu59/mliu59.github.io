@@ -45,7 +45,6 @@ Frontmatter:
 title: "My project"
 description: "One or two sentences for the card."
 thumbnail: ./thumbnail.gif
-thumbnailAlt: "What the thumbnail shows"   # optional
 link: https://github.com/me/my-project     # optional, see below
 links:                                     # optional, shown on the detail page
   - label: "GitHub repo"
