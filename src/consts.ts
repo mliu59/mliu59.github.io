@@ -11,22 +11,17 @@ export const SITE: Site = {
 export const HOME: Metadata = {
   TITLE: "Home",
   DESCRIPTION:
-    "Miles Liu — Systems Engineer at Intuitive Surgical.",
+    "Miles Liu — Generalist Software and Robotics Engineer",
 };
 
 export const BLOG: Metadata = {
   TITLE: "Blog",
-  DESCRIPTION: "Notes on robotics, engineering, and side projects.",
-};
-
-export const WORK: Metadata = {
-  TITLE: "Work",
-  DESCRIPTION: "Where I've worked and what I've done.",
+  DESCRIPTION: "Collection of project status checkpoints, thoughts, and reflections.",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "Things I've built.",
+  DESCRIPTION: "Collection of random things I've built.",
 };
 
 // Optional display-name overrides for blog project folders.

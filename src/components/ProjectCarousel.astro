@@ -3,10 +3,12 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { projectHref, isExternalHref } from "@lib/utils";
 
-// Auto-rotating, scroll-snapped gallery of project cards. One card fills the
-// track on small screens, two on medium and up. Rotation pauses while the
-// pointer or keyboard focus is inside, and is disabled entirely for users who
-// prefer reduced motion.
+// Ring carousel: three cards visible at once, the middle one in focus and the
+// neighbours scaled down either side. Advancing wraps around, so the ring
+// never hits an end. Clicking a side card brings it to the centre; clicking
+// the centre card follows its link. Rotation pauses while the pointer or
+// keyboard focus is inside, and is disabled for users who prefer reduced
+// motion.
 interface Props {
   projects: CollectionEntry<"projects">[];
   intervalMs?: number;
@@ -17,7 +19,7 @@ const { projects, intervalMs = 5000 } = Astro.props;
 
 <div class="project-carousel relative" data-interval={intervalMs}>
   <div
-    class="carousel-track flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2"
+    class="carousel-track grid overflow-hidden py-2 outline-none"
     tabindex="0"
     aria-roledescription="carousel"
     aria-label="Featured projects"
@@ -31,7 +33,7 @@ const { projects, intervalMs = 5000 } = Astro.props;
             href={href}
             target={external ? "_blank" : "_self"}
             rel={external ? "noopener noreferrer" : undefined}
-            class="carousel-slide group block w-full shrink-0 snap-start md:w-[calc(50%-0.5rem)]"
+            class="carousel-slide group block w-[70%] justify-self-center md:w-[calc((100%-2rem)/3)]"
             aria-label={`${project.data.title}: ${project.data.description}`}
             data-index={i}
           >
@@ -39,11 +41,11 @@ const { projects, intervalMs = 5000 } = Astro.props;
               <Image
                 src={project.data.thumbnail}
                 alt={project.data.thumbnailAlt ?? project.data.title}
-                width={800}
+                width={640}
                 class="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
               />
             </div>
-            <div class="mt-3">
+            <div class="mt-3 text-center">
               <span class="font-semibold text-[#284B63] dark:text-[#FFFFFF]">
                 {project.data.title}
               </span>
@@ -92,19 +94,48 @@ const { projects, intervalMs = 5000 } = Astro.props;
 </div>
 
 <style>
-  /* Hide the native scrollbar; dots + arrows are the visible controls. */
-  .carousel-track {
-    scrollbar-width: none;
+  /* Every slide shares one grid cell; JS moves them with transforms so the
+     track is as tall as the tallest card and the ring can wrap seamlessly. */
+  .carousel-slide {
+    grid-area: 1 / 1;
+    transition:
+      transform 500ms ease,
+      opacity 500ms ease;
+    will-change: transform, opacity;
   }
-  .carousel-track::-webkit-scrollbar {
-    display: none;
+  .carousel-slide[data-offset="0"] {
+    z-index: 2;
+  }
+  .carousel-slide[data-offset="-1"],
+  .carousel-slide[data-offset="1"] {
+    z-index: 1;
+    opacity: 0.55;
+  }
+  .carousel-slide[data-offset="-1"]:hover,
+  .carousel-slide[data-offset="1"]:hover {
+    opacity: 0.85;
+  }
+  .carousel-slide[data-offset="hidden"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .carousel-slide.no-transition {
+    transition: none;
   }
   .carousel-dot[aria-current="true"] {
     opacity: 1;
   }
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-slide {
+      transition: none;
+    }
+  }
 </style>
 
 <script>
+  const GAP_PX = 16;
+  const SIDE_SCALE = 0.85;
+
   function setupCarousels() {
     document
       .querySelectorAll<HTMLElement>(".project-carousel")
@@ -117,26 +148,56 @@ const { projects, intervalMs = 5000 } = Astro.props;
         const dots = [...root.querySelectorAll<HTMLButtonElement>(".carousel-dot")];
         if (!track || slides.length === 0) return;
 
+        const n = slides.length;
         const interval = Number(root.dataset.interval) || 5000;
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         let current = 0;
         let timer: number | undefined;
         let paused = false;
+        const offsets = new Array<number>(n).fill(0);
 
-        function goTo(index: number) {
-          current = (index + slides.length) % slides.length;
-          track!.scrollTo({ left: slides[current].offsetLeft - track!.offsetLeft, behavior: "smooth" });
-          updateDots();
+        // Signed ring distance from `current` to slide i, in (-n/2, n/2].
+        function ringOffset(i: number) {
+          let d = (i - current) % n;
+          if (d < 0) d += n;
+          if (d > n / 2) d -= n;
+          return d;
         }
 
-        function updateDots() {
+        function layout() {
+          const step = slides[0].offsetWidth + GAP_PX;
+          slides.forEach((slide, i) => {
+            const off = ringOffset(i);
+            const prev = offsets[i];
+            offsets[i] = off;
+            const visible = n <= 3 ? true : Math.abs(off) <= 1;
+            // A slide wrapping from one edge of the ring to the other would
+            // otherwise slide straight through the centre; snap it instead.
+            const wraps = Math.abs(off - prev) > 1;
+            slide.classList.toggle("no-transition", wraps);
+            const scale = off === 0 ? 1 : SIDE_SCALE;
+            slide.style.transform = `translateX(${off * step}px) scale(${scale})`;
+            slide.dataset.offset = visible ? String(off) : "hidden";
+            slide.tabIndex = off === 0 ? 0 : -1;
+            if (wraps) {
+              // Re-enable transitions on the next frame so the snap stays instant.
+              requestAnimationFrame(() =>
+                requestAnimationFrame(() => slide.classList.remove("no-transition"))
+              );
+            }
+          });
           dots.forEach((dot, i) =>
             dot.setAttribute("aria-current", String(i === current))
           );
         }
 
+        function goTo(index: number) {
+          current = ((index % n) + n) % n;
+          layout();
+        }
+
         function start() {
-          if (reduceMotion || slides.length < 2) return;
+          if (reduceMotion || n < 2) return;
           stop();
           timer = window.setInterval(() => {
             if (!paused && document.visibilityState === "visible") goTo(current + 1);
@@ -148,21 +209,15 @@ const { projects, intervalMs = 5000 } = Astro.props;
           timer = undefined;
         }
 
-        // Keep `current` in sync when the user scrolls/swipes the track directly.
-        let scrollDebounce: number | undefined;
-        track.addEventListener("scroll", () => {
-          window.clearTimeout(scrollDebounce);
-          scrollDebounce = window.setTimeout(() => {
-            const left = track.scrollLeft + track.offsetLeft;
-            let nearest = 0;
-            let best = Infinity;
-            slides.forEach((s, i) => {
-              const d = Math.abs(s.offsetLeft - left);
-              if (d < best) { best = d; nearest = i; }
-            });
-            current = nearest;
-            updateDots();
-          }, 100);
+        // Side cards centre themselves on click; only the centre card navigates.
+        slides.forEach((slide, i) => {
+          slide.addEventListener("click", (e) => {
+            if (offsets[i] !== 0) {
+              e.preventDefault();
+              goTo(i);
+              start();
+            }
+          });
         });
 
         root.querySelector(".carousel-prev")?.addEventListener("click", () => { goTo(current - 1); start(); });
@@ -180,7 +235,24 @@ const { projects, intervalMs = 5000 } = Astro.props;
           if (e.key === "ArrowLeft") { e.preventDefault(); goTo(current - 1); }
         });
 
-        updateDots();
+        // Basic swipe support.
+        let touchX: number | null = null;
+        track.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener("touchend", (e) => {
+          if (touchX === null) return;
+          const dx = e.changedTouches[0].clientX - touchX;
+          touchX = null;
+          if (Math.abs(dx) > 40) { goTo(current + (dx < 0 ? 1 : -1)); start(); }
+        });
+
+        window.addEventListener("resize", layout);
+
+        // Lay out once without animating so the first paint is already in place.
+        slides.forEach((s) => s.classList.add("no-transition"));
+        layout();
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => slides.forEach((s) => s.classList.remove("no-transition")))
+        );
         start();
       });
   }
