@@ -46,7 +46,6 @@ const { projects, intervalMs = 5000 } = Astro.props;
             <div class="mt-3">
               <span class="font-semibold text-[#284B63] dark:text-[#FFFFFF]">
                 {project.data.title}
-                {external && <span class="ml-1 text-sm opacity-60" aria-hidden="true">&#8599;</span>}
               </span>
               <p class="mt-1 text-sm leading-snug opacity-80 line-clamp-2">
                 {project.data.description}

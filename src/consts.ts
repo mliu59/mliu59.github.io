@@ -26,7 +26,7 @@ export const WORK: Metadata = {
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "Things I've built: write-ups, repos, and demos.",
+  DESCRIPTION: "Things I've built.",
 };
 
 // Optional display-name overrides for blog project folders.
