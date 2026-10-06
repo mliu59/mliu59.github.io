@@ -46,12 +46,39 @@ const latestPosts = (await getCollection("blog"))
       </article>
     </section>
 
+    <section class="mt-24">
+      <h4 class="animate text-center font-semibold text-[#353535] dark:text-[#FFFFFF]">
+        GitHub:
+        <a
+          href="https://github.com/mliu59"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-sans font-semibold text-current underline underline-offset-2 decoration-[#3C6E71]/40 dark:decoration-[#D9D9D9]/30 transition-colors duration-300 ease-in-out hover:text-[#284B63] dark:hover:text-[#FFFFFF] hover:decoration-[#284B63]/60 dark:hover:decoration-[#FFFFFF]/50"
+        >
+          mliu59
+        </a>
+      </h4>
+      <a
+        href="https://github.com/mliu59"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="animate mt-4 block"
+      >
+        <img
+          src="https://ghchart.rshah.org/3C6E71/mliu59"
+          alt="Miles Liu's GitHub contribution graph"
+          loading="lazy"
+          class="w-full dark:invert dark:hue-rotate-180"
+        />
+      </a>
+    </section>
+
     {
       latestPosts.length > 0 && (
         <section class="mt-24">
           <div class="animate flex items-baseline justify-between">
             <h4 class="font-semibold text-[#353535] dark:text-[#FFFFFF]">
-              Latest posts
+              Latest blog posts
             </h4>
             <Link href="/blog" underline={false}>
               <span class="text-sm text-[#3C6E71] dark:text-[#9bbfc1]">
