@@ -5,6 +5,10 @@ import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import Link from "@components/Link.astro";
 import PostCard from "@components/PostCard.astro";
+import ProjectCarousel from "@components/ProjectCarousel.astro";
+import { Button } from "@/components/starwind/button";
+import { ItemGroup, ItemSeparator } from "@/components/starwind/item";
+import ArrowRight from "@tabler/icons/outline/arrow-right.svg";
 import { HOME, SITE } from "@consts";
 import portrait from "../assets/ML.jpg";
 
@@ -12,21 +16,20 @@ const latestPosts = (await getCollection("blog"))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+
+const featuredProjects = (await getCollection("projects"))
+  .filter((p) => !p.data.draft && p.data.featured)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-[#353535] dark:text-[#FFFFFF]">
-      Hi, I'm Miles <span class="text-xl"></span>
-    </h4>
-    <section>
-      <article class="space-y-4 flex flex-col md:block">
-        <Image
-          src={portrait}
-          alt="Miles Liu"
-          width={220}
-          class="animate order-last block mx-auto my-6 rounded-lg md:order-none md:float-right md:mx-0 md:my-0 md:ml-4 md:mb-2"
-        />
+    <section class="flex flex-col gap-6 md:flex-row md:items-start">
+      <article class="min-w-0 flex-1 space-y-4">
+        <h4 class="animate font-semibold text-foreground">
+          Hi, I'm Miles <span class="text-xl"></span>
+        </h4>
         <p class="animate">
           I'm a Generalist software and robotics engineer with AI/ML applications experience. Most recently a Systems Engineer on the Advanced Product Development team at
           <Link href="https://www.intuitive.com/en-us" external>Intuitive Surgical</Link>
@@ -39,24 +42,19 @@ const latestPosts = (await getCollection("blog"))
             Computer Integrated Interventional Systems (CIIS) Laboratory
           </Link>
         </p>
-        <p class="animate">
-          Check out a game I've been working on:
-          <Link href="https://wikispeedruns.com/" external>Wikispeedruns</Link>
-        </p>
       </article>
+      <Image
+        src={portrait}
+        alt="Miles Liu"
+        width={220}
+        class="animate mx-auto w-[220px] shrink-0 rounded-sm md:mx-0"
+      />
     </section>
 
-    <section class="mt-24">
-      <h4 class="animate text-center font-semibold text-[#353535] dark:text-[#FFFFFF]">
+    <section class="mt-12">
+      <h4 class="animate font-semibold text-foreground">
         GitHub:
-        <a
-          href="https://github.com/mliu59"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="font-sans font-semibold text-current underline underline-offset-2 decoration-[#3C6E71]/40 dark:decoration-[#D9D9D9]/30 transition-colors duration-300 ease-in-out hover:text-[#284B63] dark:hover:text-[#FFFFFF] hover:decoration-[#284B63]/60 dark:hover:decoration-[#FFFFFF]/50"
-        >
-          mliu59
-        </a>
+        <Link href="https://github.com/mliu59" external>mliu59</Link>
       </h4>
       <a
         href="https://github.com/mliu59"
@@ -74,23 +72,44 @@ const latestPosts = (await getCollection("blog"))
     </section>
 
     {
-      latestPosts.length > 0 && (
+      featuredProjects.length > 0 && (
         <section class="mt-24">
-          <div class="animate flex items-baseline justify-between">
-            <h4 class="font-semibold text-[#353535] dark:text-[#FFFFFF]">
-              Latest blog posts
+          <div class="animate flex items-center justify-between">
+            <h4 class="font-semibold text-foreground">
+              Projects
             </h4>
-            <Link href="/blog" underline={false}>
-              <span class="text-sm text-[#3C6E71] dark:text-[#9bbfc1]">
-                All posts &rarr;
-              </span>
-            </Link>
+            <Button href="/projects" variant="ghost" size="sm" class="text-primary-accent">
+              All projects
+              <ArrowRight aria-hidden="true" />
+            </Button>
           </div>
           <div class="animate mt-4">
-            {latestPosts.map((post) => (
-              <PostCard post={post} />
-            ))}
+            <ProjectCarousel projects={featuredProjects} />
           </div>
+        </section>
+      )
+    }
+
+    {
+      latestPosts.length > 0 && (
+        <section class="mt-24">
+          <div class="animate flex items-center justify-between">
+            <h4 class="font-semibold text-foreground">
+              Latest blog posts
+            </h4>
+            <Button href="/blog" variant="ghost" size="sm" class="text-primary-accent">
+              All posts
+              <ArrowRight aria-hidden="true" />
+            </Button>
+          </div>
+          <ItemGroup class="animate mt-4">
+            {latestPosts.map((post, i) => (
+              <>
+                {i > 0 && <ItemSeparator />}
+                <PostCard post={post} />
+              </>
+            ))}
+          </ItemGroup>
         </section>
       )
     }

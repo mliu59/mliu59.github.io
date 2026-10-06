@@ -1,0 +1,283 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/forms";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Site palette (mapped onto Starwind's semantic tokens below):
+  --eerie-black: #353535
+  --genoa (teal): #3C6E71
+  --white:        #FFFFFF
+  --pinball (light grey): #D9D9D9
+  --indigo-dye:   #284B63
+  --teal-light (dark-mode accent): #9bbfc1
+*/
+
+@theme {
+  --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sans);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--starwind-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--starwind-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-accent: var(--primary-accent);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-accent: var(--secondary-accent);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-outline: var(--outline);
+
+  --radius-xs: calc(var(--radius) - 0.375rem);
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: calc(var(--radius) - 0.125rem);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+  --radius-2xl: calc(var(--radius) + 0.5rem);
+  --radius-3xl: calc(var(--radius) + 1rem);
+
+  --color-sidebar: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-outline: var(--sidebar-outline);
+}
+
+:root {
+  --background: #d9d9d9;
+  --foreground: #353535;
+  --card: #e4e4e4;
+  --card-foreground: #353535;
+  --popover: #e4e4e4;
+  --popover-foreground: #353535;
+  --primary: #284b63;
+  --primary-foreground: #ffffff;
+  --primary-accent: #3c6e71;
+  --secondary: #c6cfd4;
+  --secondary-foreground: #284b63;
+  --secondary-accent: #3c6e71;
+  --muted: #cbcbcb;
+  --muted-foreground: #5c5c5c;
+  --accent: #c6d3d9;
+  --accent-foreground: #284b63;
+  --info: var(--color-sky-300);
+  --info-foreground: var(--color-sky-950);
+  --success: var(--color-green-300);
+  --success-foreground: var(--color-green-950);
+  --warning: var(--color-amber-300);
+  --warning-foreground: var(--color-amber-950);
+  --error: var(--color-red-700);
+  --error-foreground: var(--color-neutral-50);
+  --border: --alpha(#353535 / 15%);
+  --input: --alpha(#353535 / 20%);
+  --outline: #3c6e71;
+  --radius: 0.625rem;
+
+  /* sidebar variables */
+  --sidebar-background: #e4e4e4;
+  --sidebar-foreground: #353535;
+  --sidebar-primary: #284b63;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #c6d3d9;
+  --sidebar-accent-foreground: #284b63;
+  --sidebar-border: --alpha(#353535 / 15%);
+  --sidebar-outline: #3c6e71;
+}
+
+.dark {
+  --background: #353535;
+  --foreground: #d9d9d9;
+  --card: #3f3f3f;
+  --card-foreground: #d9d9d9;
+  --popover: #3f3f3f;
+  --popover-foreground: #d9d9d9;
+  --primary: #284b63;
+  --primary-foreground: #ffffff;
+  --primary-accent: #9bbfc1;
+  --secondary: #474747;
+  --secondary-foreground: #d9d9d9;
+  --secondary-accent: #9bbfc1;
+  --muted: #444444;
+  --muted-foreground: #a8a8a8;
+  --accent: #2f4a5c;
+  --accent-foreground: #ffffff;
+  --info: var(--color-sky-300);
+  --info-foreground: var(--color-sky-950);
+  --success: var(--color-green-300);
+  --success-foreground: var(--color-green-950);
+  --warning: var(--color-amber-300);
+  --warning-foreground: var(--color-amber-950);
+  --error: var(--color-red-800);
+  --error-foreground: var(--color-neutral-50);
+  --border: --alpha(#d9d9d9 / 15%);
+  --input: --alpha(#d9d9d9 / 20%);
+  --outline: #9bbfc1;
+
+  /* sidebars variables */
+  --sidebar-background: #3f3f3f;
+  --sidebar-foreground: #d9d9d9;
+  --sidebar-primary: #284b63;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2f4a5c;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: --alpha(#d9d9d9 / 15%);
+  --sidebar-outline: #9bbfc1;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-outline/50;
+  }
+  body {
+    @apply bg-background text-foreground scheme-light dark:scheme-dark;
+  }
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+/* ==========================================================================
+ * Site layout
+ * ========================================================================== */
+
+html {
+  overflow-y: scroll;
+}
+
+html,
+body {
+  @apply size-full;
+}
+
+body {
+  @apply font-sans antialiased text-base md:text-lg leading-snug;
+  @apply flex flex-col;
+}
+
+/* Site nav header only. Scoped to the direct body child so it doesn't also
+   style the <header> the blog post template uses for its title block. */
+body > header {
+  @apply fixed top-0 left-0 right-0 z-50 py-2 md:py-4;
+  @apply bg-primary text-primary-foreground;
+}
+
+main {
+  @apply flex-1 py-16 md:py-32;
+}
+
+footer {
+  @apply py-5 text-sm md:text-base;
+  @apply md:mb-12;
+}
+
+/* ==========================================================================
+ * Prose (markdown content) overrides for the Starwind Prose component
+ * ========================================================================== */
+
+.sw-prose {
+  --prose-color: var(--foreground);
+  --prose-heading-color: var(--foreground);
+  --prose-link-color: var(--primary-accent);
+  --prose-link-hover-color: var(--primary);
+  --prose-link-decoration-color: --alpha(var(--primary-accent) / 40%);
+  --prose-list-marker-color: var(--primary-accent);
+  --prose-media-border-radius: var(--radius-sm);
+  --prose-code-bg: --alpha(var(--primary-accent) / 12%);
+  --prose-code-color: var(--primary);
+  --prose-h2-size: 1.5em;
+  --prose-h3-size: 1.25em;
+  --prose-h4-size: 1.1em;
+  max-width: none;
+}
+
+.dark .sw-prose {
+  --prose-link-hover-color: #ffffff;
+  --prose-code-bg: --alpha(#ffffff / 10%);
+  --prose-code-color: var(--primary-accent);
+}
+
+.sw-prose a:not(:where(.not-sw-prose *)) {
+  font-weight: 600;
+}
+
+/* Default display cap so a tall image never dominates the page. Per-image
+   overrides via markdown `{h=… w=…}` (remarkImageAttrs) set an inline style,
+   which wins over this. Display only; it does not change downloaded bytes. */
+.sw-prose img:not(:where(.not-sw-prose *)) {
+  margin-inline: auto;
+  max-height: 540px;
+  width: auto;
+}
+
+.sw-prose figure:not(:where(.not-sw-prose *)) {
+  margin-block: 2em;
+}
+
+.sw-prose figcaption:not(:where(.not-sw-prose *)) {
+  text-align: center;
+  font-style: italic;
+}
+
+/* ==========================================================================
+ * Entrance animation and back-to-top visibility (driven by Head.astro)
+ * ========================================================================== */
+
+.animate {
+  @apply opacity-0 translate-y-3;
+  @apply transition-all duration-700 ease-out;
+}
+
+.animate.show {
+  @apply opacity-100 translate-y-0;
+}
+
+html #back-to-top {
+  @apply opacity-0 pointer-events-none;
+}
+
+html.scrolled #back-to-top {
+  @apply opacity-100 pointer-events-auto;
+}

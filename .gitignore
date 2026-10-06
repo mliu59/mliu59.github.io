@@ -23,3 +23,6 @@ pnpm-debug.log*
 
 # editor settings
 .vscode/
+
+# playwright mcp scratch output
+.playwright-mcp/

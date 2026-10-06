@@ -1,7 +1,7 @@
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
 
 // Wrap any standalone markdown image (an image alone in a paragraph) in a
 // <figure>, using its alt text as a visible <figcaption>. Lets posts add image
@@ -88,9 +88,14 @@ function remarkImageAttrs() {
 
 export default defineConfig({
   site: "https://mliu59.github.io",
-  integrations: [mdx(), sitemap(), tailwind()],
+  integrations: [mdx(), sitemap()],
   markdown: {
     remarkPlugins: [remarkImageAttrs],
     rehypePlugins: [rehypeImageFigure],
+  },
+  // Tailwind v4 runs as a Vite plugin (Starwind UI setup); the stylesheet is
+  // src/styles/starwind.css, imported from Head.astro.
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

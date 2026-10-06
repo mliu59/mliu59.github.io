@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import { ItemGroup, ItemSeparator } from "@/components/starwind/item";
+import { PROJECTS } from "@consts";
+
+const projects = (await getCollection("projects"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+  <Container>
+    <h4 class="animate font-semibold text-foreground">
+      Projects
+    </h4>
+    <p class="animate mt-2 text-sm text-muted-foreground">{PROJECTS.DESCRIPTION}</p>
+
+    <ItemGroup class="animate mt-8">
+      {projects.map((project, i) => (
+        <>
+          {i > 0 && <ItemSeparator />}
+          <ProjectCard project={project} />
+        </>
+      ))}
+    </ItemGroup>
+
+    {projects.length === 0 && <p class="mt-8 text-muted-foreground">No projects yet.</p>}
+  </Container>
+</PageLayout>

@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
+import { Prose } from "@/components/starwind/prose";
+import { Button } from "@/components/starwind/button";
+import { Separator } from "@/components/starwind/separator";
+import ExternalLink from "@tabler/icons/outline/external-link.svg";
+import { projectPath, isExternalHref } from "@lib/utils";
+
+// Detail pages are generated only for projects without an explicit `link`;
+// linked projects send visitors straight to that link instead.
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects")).filter(
+    (p) => !p.data.draft && !p.data.link
+  );
+  return projects.map((project) => ({
+    params: { id: projectPath(project.id).replace(/^\/projects\//, "") },
+    props: { project },
+  }));
+}
+
+type Props = { project: CollectionEntry<"projects"> };
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<PageLayout title={project.data.title} description={project.data.description}>
+  <Container>
+    <div class="animate text-sm text-muted-foreground">
+      <Link href="/projects" underline={false}>&larr; All projects</Link>
+    </div>
+
+    <article class="mt-6">
+      <header class="animate mb-8">
+        <h1 class="text-3xl md:text-4xl font-semibold text-foreground">
+          {project.data.title}
+        </h1>
+        <p class="mt-2 text-muted-foreground">{project.data.description}</p>
+        {
+          project.data.links.length > 0 && (
+            <div class="mt-4 flex flex-wrap gap-2">
+              {project.data.links.map((l) => {
+                const external = isExternalHref(l.href);
+                return (
+                  <Button
+                    href={l.href}
+                    variant="outline"
+                    size="sm"
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                  >
+                    {l.label}
+                    {external && <ExternalLink aria-hidden="true" />}
+                  </Button>
+                );
+              })}
+            </div>
+          )
+        }
+      </header>
+
+      <Image
+        src={project.data.thumbnail}
+        alt={project.data.title}
+        class="animate mb-8 rounded-sm w-full"
+      />
+
+      <Prose class="animate">
+        <Content />
+      </Prose>
+    </article>
+
+    <Separator class="mt-12" />
+    <div class="animate mt-6 text-sm text-muted-foreground">
+      <Link href="/projects" underline={false}>&larr; All projects</Link>
+    </div>
+  </Container>
+</PageLayout>

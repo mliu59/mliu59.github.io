@@ -1,6 +1,5 @@
 ---
 title: "Spidertron: Learning to Train Hexapod Locomotion Using RL"
-description: "Findings from an exploratory RL locomotion project: a simulated hexapod, reward tuning churn, and broken physics."
 date: 2026-09-17
 tags: ["hexapod-rl-sim", "reinforcement-learning", "robotics"]
 draft: false

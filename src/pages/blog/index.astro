@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import PostCard from "@components/PostCard.astro";
+import { ToggleGroup, ToggleGroupItem } from "@/components/starwind/toggle-group";
+import { ItemGroup, ItemSeparator } from "@/components/starwind/item";
 import { BLOG } from "@consts";
 import { getProject } from "@lib/projects";
 
@@ -25,65 +27,77 @@ const projects = [...projectMap.entries()]
 
 <PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-[#353535] dark:text-[#FFFFFF]">
+    <h4 class="animate font-semibold text-foreground">
       Blog
     </h4>
 
-    <div class="animate mt-6 flex flex-wrap gap-2" role="group" aria-label="Filter posts by project">
-      <button
-        type="button"
-        data-filter="all"
-        class="filter-btn rounded-full border border-current/20 px-3 py-1 text-sm transition-colors"
-        aria-pressed="true"
-      >
+    <ToggleGroup
+      id="post-filter"
+      variant="outline"
+      size="sm"
+      class="animate mt-6 flex-wrap"
+      defaultValue={["all"]}
+      aria-label="Filter posts by project"
+    >
+      <ToggleGroupItem value="all" class="rounded-sm data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:hover:bg-primary data-[state=on]:hover:text-primary-foreground">
         All <span class="opacity-60">({posts.length})</span>
-      </button>
+      </ToggleGroupItem>
       {
         projects.map((project) => (
-          <button
-            type="button"
-            data-filter={project.slug}
-            class="filter-btn rounded-full border border-current/20 px-3 py-1 text-sm transition-colors"
-            aria-pressed="false"
-          >
+          <ToggleGroupItem value={project.slug} class="rounded-sm data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:hover:bg-primary data-[state=on]:hover:text-primary-foreground">
             {project.name} <span class="opacity-60">({project.count})</span>
-          </button>
+          </ToggleGroupItem>
         ))
       }
-    </div>
+    </ToggleGroup>
 
-    <div id="post-list" class="animate mt-8">
-      {posts.map((post) => <PostCard post={post} />)}
-    </div>
+    <ItemGroup id="post-list" class="animate mt-8">
+      {posts.map((post, i) => (
+        <>
+          {i > 0 && <ItemSeparator data-project-separator />}
+          <PostCard post={post} />
+        </>
+      ))}
+    </ItemGroup>
 
-    <p id="empty-state" class="mt-8 hidden opacity-70">No posts in this project yet.</p>
+    <p id="empty-state" class="mt-8 hidden text-muted-foreground">No posts in this project yet.</p>
   </Container>
 </PageLayout>
 
 <script>
+  // The Starwind ToggleGroup runtime owns the pressed state (data-state="on"
+  // on the active item). We watch those attribute changes and filter the list
+  // to match; an empty selection falls back to "all".
   function setupFilter() {
-    const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const group = document.getElementById("post-filter");
     const posts = document.querySelectorAll<HTMLElement>("#post-list [data-project]");
     const empty = document.getElementById("empty-state");
+    if (!group) return;
 
-    function apply(filter: string) {
+    function apply() {
+      const active = group!.querySelector<HTMLElement>('[data-sw-toggle][data-state="on"]');
+      const filter = active?.dataset.value || "all";
       let visible = 0;
       posts.forEach((post) => {
         const match = filter === "all" || post.dataset.project === filter;
         post.classList.toggle("hidden", !match);
+        // Show the separator directly above this post only when it is visible
+        // and not the first visible post, so hidden posts never leave stacked
+        // or leading separators behind.
+        const sep = post.previousElementSibling;
+        if (sep instanceof HTMLElement && sep.hasAttribute("data-project-separator")) {
+          sep.classList.toggle("hidden", !match || visible === 0);
+        }
         if (match) visible++;
-      });
-      buttons.forEach((btn) => {
-        btn.setAttribute("aria-pressed", String(btn.dataset.filter === filter));
       });
       empty?.classList.toggle("hidden", visible > 0);
     }
 
-    buttons.forEach((btn) =>
-      btn.addEventListener("click", () => apply(btn.dataset.filter || "all"))
-    );
+    const observer = new MutationObserver(apply);
+    observer.observe(group, { subtree: true, attributes: true, attributeFilter: ["data-state"] });
+    document.addEventListener("astro:before-swap", () => observer.disconnect(), { once: true });
 
-    apply("all");
+    apply();
   }
 
   setupFilter();

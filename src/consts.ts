@@ -5,28 +5,23 @@ export const SITE: Site = {
   EMAIL: "liumai1999@hotmail.com",
   NUM_POSTS_ON_HOMEPAGE: 5,
   NUM_WORKS_ON_HOMEPAGE: 2,
-  NUM_PROJECTS_ON_HOMEPAGE: 3,
+  NUM_PROJECTS_ON_HOMEPAGE: 6,
 };
 
 export const HOME: Metadata = {
   TITLE: "Home",
   DESCRIPTION:
-    "Miles Liu — Systems Engineer at Intuitive Surgical.",
+    "Miles Liu — Generalist Software and Robotics Engineer",
 };
 
 export const BLOG: Metadata = {
   TITLE: "Blog",
-  DESCRIPTION: "Notes on robotics, engineering, and side projects.",
-};
-
-export const WORK: Metadata = {
-  TITLE: "Work",
-  DESCRIPTION: "Where I've worked and what I've done.",
+  DESCRIPTION: "Collection of project status checkpoints, thoughts, and reflections.",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "Things I've built — links to repos and demos.",
+  DESCRIPTION: "Collection of random things I've built.",
 };
 
 // Optional display-name overrides for blog project folders.
