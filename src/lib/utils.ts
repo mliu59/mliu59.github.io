@@ -27,6 +27,21 @@ export function postPath(id: string) {
   return `/blog/${id.replace(/\/index$/, "")}`;
 }
 
+// Maps a projects entry id (e.g. "kartogen/index") to its detail page URL.
+export function projectPath(id: string) {
+  return `/projects/${id.replace(/\/index$/, "")}`;
+}
+
+// Where a project card should link: the explicit `link` if given, otherwise
+// the generated detail page.
+export function projectHref(id: string, link?: string) {
+  return link ?? projectPath(id);
+}
+
+export function isExternalHref(href: string) {
+  return /^(https?:)?\/\//.test(href);
+}
+
 export function formatDate(date: Date) {
   return Intl.DateTimeFormat("en-US", {
     month: "short",

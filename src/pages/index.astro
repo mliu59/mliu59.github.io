@@ -5,6 +5,7 @@ import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import Link from "@components/Link.astro";
 import PostCard from "@components/PostCard.astro";
+import ProjectCarousel from "@components/ProjectCarousel.astro";
 import { HOME, SITE } from "@consts";
 import portrait from "../assets/ML.jpg";
 
@@ -12,6 +13,11 @@ const latestPosts = (await getCollection("blog"))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+
+const featuredProjects = (await getCollection("projects"))
+  .filter((p) => !p.data.draft && p.data.featured)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -72,6 +78,26 @@ const latestPosts = (await getCollection("blog"))
         />
       </a>
     </section>
+
+    {
+      featuredProjects.length > 0 && (
+        <section class="mt-24">
+          <div class="animate flex items-baseline justify-between">
+            <h4 class="font-semibold text-[#353535] dark:text-[#FFFFFF]">
+              Projects
+            </h4>
+            <Link href="/projects" underline={false}>
+              <span class="text-sm text-[#3C6E71] dark:text-[#9bbfc1]">
+                All projects &rarr;
+              </span>
+            </Link>
+          </div>
+          <div class="animate mt-4">
+            <ProjectCarousel projects={featuredProjects} />
+          </div>
+        </section>
+      )
+    }
 
     {
       latestPosts.length > 0 && (

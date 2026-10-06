@@ -1,0 +1,191 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { projectHref, isExternalHref } from "@lib/utils";
+
+// Auto-rotating, scroll-snapped gallery of project cards. One card fills the
+// track on small screens, two on medium and up. Rotation pauses while the
+// pointer or keyboard focus is inside, and is disabled entirely for users who
+// prefer reduced motion.
+interface Props {
+  projects: CollectionEntry<"projects">[];
+  intervalMs?: number;
+}
+
+const { projects, intervalMs = 5000 } = Astro.props;
+---
+
+<div class="project-carousel relative" data-interval={intervalMs}>
+  <div
+    class="carousel-track flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2"
+    tabindex="0"
+    aria-roledescription="carousel"
+    aria-label="Featured projects"
+  >
+    {
+      projects.map((project, i) => {
+        const href = projectHref(project.id, project.data.link);
+        const external = isExternalHref(href);
+        return (
+          <a
+            href={href}
+            target={external ? "_blank" : "_self"}
+            rel={external ? "noopener noreferrer" : undefined}
+            class="carousel-slide group block w-full shrink-0 snap-start md:w-[calc(50%-0.5rem)]"
+            aria-label={`${project.data.title}: ${project.data.description}`}
+            data-index={i}
+          >
+            <div class="overflow-hidden rounded-lg bg-[#3C6E71]/10 dark:bg-[#FFFFFF]/5">
+              <Image
+                src={project.data.thumbnail}
+                alt={project.data.thumbnailAlt ?? project.data.title}
+                width={800}
+                class="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+              />
+            </div>
+            <div class="mt-3">
+              <span class="font-semibold text-[#284B63] dark:text-[#FFFFFF]">
+                {project.data.title}
+                {external && <span class="ml-1 text-sm opacity-60" aria-hidden="true">&#8599;</span>}
+              </span>
+              <p class="mt-1 text-sm leading-snug opacity-80 line-clamp-2">
+                {project.data.description}
+              </p>
+            </div>
+          </a>
+        );
+      })
+    }
+  </div>
+
+  {
+    projects.length > 1 && (
+      <div class="mt-2 flex items-center justify-between">
+        <div class="flex gap-2" role="tablist" aria-label="Choose project">
+          {projects.map((project, i) => (
+            <button
+              type="button"
+              class="carousel-dot h-2 w-2 rounded-full bg-current opacity-30 transition-opacity hover:opacity-70"
+              data-index={i}
+              aria-label={`Go to ${project.data.title}`}
+            />
+          ))}
+        </div>
+        <div class="flex gap-2">
+          <button
+            type="button"
+            class="carousel-prev rounded-full border border-current/20 px-3 py-1 text-sm transition-colors hover:bg-[#284B63] hover:text-[#FFFFFF] hover:border-[#284B63]"
+            aria-label="Previous project"
+          >
+            &larr;
+          </button>
+          <button
+            type="button"
+            class="carousel-next rounded-full border border-current/20 px-3 py-1 text-sm transition-colors hover:bg-[#284B63] hover:text-[#FFFFFF] hover:border-[#284B63]"
+            aria-label="Next project"
+          >
+            &rarr;
+          </button>
+        </div>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  /* Hide the native scrollbar; dots + arrows are the visible controls. */
+  .carousel-track {
+    scrollbar-width: none;
+  }
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel-dot[aria-current="true"] {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  function setupCarousels() {
+    document
+      .querySelectorAll<HTMLElement>(".project-carousel")
+      .forEach((root) => {
+        if (root.dataset.ready) return;
+        root.dataset.ready = "1";
+
+        const track = root.querySelector<HTMLElement>(".carousel-track");
+        const slides = [...root.querySelectorAll<HTMLElement>(".carousel-slide")];
+        const dots = [...root.querySelectorAll<HTMLButtonElement>(".carousel-dot")];
+        if (!track || slides.length === 0) return;
+
+        const interval = Number(root.dataset.interval) || 5000;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let current = 0;
+        let timer: number | undefined;
+        let paused = false;
+
+        function goTo(index: number) {
+          current = (index + slides.length) % slides.length;
+          track!.scrollTo({ left: slides[current].offsetLeft - track!.offsetLeft, behavior: "smooth" });
+          updateDots();
+        }
+
+        function updateDots() {
+          dots.forEach((dot, i) =>
+            dot.setAttribute("aria-current", String(i === current))
+          );
+        }
+
+        function start() {
+          if (reduceMotion || slides.length < 2) return;
+          stop();
+          timer = window.setInterval(() => {
+            if (!paused && document.visibilityState === "visible") goTo(current + 1);
+          }, interval);
+        }
+
+        function stop() {
+          if (timer !== undefined) window.clearInterval(timer);
+          timer = undefined;
+        }
+
+        // Keep `current` in sync when the user scrolls/swipes the track directly.
+        let scrollDebounce: number | undefined;
+        track.addEventListener("scroll", () => {
+          window.clearTimeout(scrollDebounce);
+          scrollDebounce = window.setTimeout(() => {
+            const left = track.scrollLeft + track.offsetLeft;
+            let nearest = 0;
+            let best = Infinity;
+            slides.forEach((s, i) => {
+              const d = Math.abs(s.offsetLeft - left);
+              if (d < best) { best = d; nearest = i; }
+            });
+            current = nearest;
+            updateDots();
+          }, 100);
+        });
+
+        root.querySelector(".carousel-prev")?.addEventListener("click", () => { goTo(current - 1); start(); });
+        root.querySelector(".carousel-next")?.addEventListener("click", () => { goTo(current + 1); start(); });
+        dots.forEach((dot) =>
+          dot.addEventListener("click", () => { goTo(Number(dot.dataset.index)); start(); })
+        );
+
+        root.addEventListener("mouseenter", () => { paused = true; });
+        root.addEventListener("mouseleave", () => { paused = false; });
+        root.addEventListener("focusin", () => { paused = true; });
+        root.addEventListener("focusout", () => { paused = false; });
+        track.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowRight") { e.preventDefault(); goTo(current + 1); }
+          if (e.key === "ArrowLeft") { e.preventDefault(); goTo(current - 1); }
+        });
+
+        updateDots();
+        start();
+      });
+  }
+
+  setupCarousels();
+  document.addEventListener("astro:after-swap", setupCarousels);
+</script>

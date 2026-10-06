@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { projectHref, isExternalHref } from "@lib/utils";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  class?: string;
+}
+
+const { project, class: className = "" } = Astro.props;
+const href = projectHref(project.id, project.data.link);
+const external = isExternalHref(href);
+---
+
+<a
+  href={href}
+  target={external ? "_blank" : "_self"}
+  rel={external ? "noopener noreferrer" : undefined}
+  class={`group flex gap-4 py-4 border-t border-current/10 transition-opacity hover:opacity-70 ${className}`}
+>
+  <Image
+    src={project.data.thumbnail}
+    alt={project.data.thumbnailAlt ?? project.data.title}
+    width={320}
+    class="h-20 w-28 shrink-0 rounded-md object-cover sm:h-24 sm:w-40"
+  />
+  <div class="min-w-0 flex-1">
+    <div class="flex items-baseline justify-between gap-4">
+      <span class="font-semibold text-[#284B63] dark:text-[#FFFFFF]">
+        {project.data.title}
+        {external && <span class="ml-1 text-sm opacity-60" aria-hidden="true">&#8599;</span>}
+      </span>
+    </div>
+    <p class="mt-1 text-sm leading-snug opacity-80">
+      {project.data.description}
+    </p>
+    {
+      project.data.tags && project.data.tags.length > 0 && (
+        <div class="mt-2 flex flex-wrap gap-1.5">
+          {project.data.tags.map((tag) => (
+            <span class="rounded-full bg-[#3C6E71]/10 px-2 py-0.5 text-xs text-[#284B63] dark:bg-[#FFFFFF]/10 dark:text-[#9bbfc1]">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</a>

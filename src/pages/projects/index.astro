@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import { PROJECTS } from "@consts";
+
+const projects = (await getCollection("projects"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+  <Container>
+    <h4 class="animate font-semibold text-[#353535] dark:text-[#FFFFFF]">
+      Projects
+    </h4>
+    <p class="animate mt-2 text-sm opacity-70">{PROJECTS.DESCRIPTION}</p>
+
+    <div class="animate mt-8">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+
+    {projects.length === 0 && <p class="mt-8 opacity-70">No projects yet.</p>}
+  </Container>
+</PageLayout>

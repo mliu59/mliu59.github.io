@@ -5,7 +5,7 @@ export const SITE: Site = {
   EMAIL: "liumai1999@hotmail.com",
   NUM_POSTS_ON_HOMEPAGE: 5,
   NUM_WORKS_ON_HOMEPAGE: 2,
-  NUM_PROJECTS_ON_HOMEPAGE: 3,
+  NUM_PROJECTS_ON_HOMEPAGE: 6,
 };
 
 export const HOME: Metadata = {
@@ -26,7 +26,7 @@ export const WORK: Metadata = {
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "Things I've built — links to repos and demos.",
+  DESCRIPTION: "Things I've built: write-ups, repos, and demos.",
 };
 
 // Optional display-name overrides for blog project folders.
