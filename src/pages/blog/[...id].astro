@@ -6,6 +6,10 @@ import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import FormattedDate from "@components/FormattedDate.astro";
+import { Prose } from "@/components/starwind/prose";
+import { Badge } from "@/components/starwind/badge";
+import { Separator } from "@/components/starwind/separator";
+import { SITE } from "@consts";
 import { postPath } from "@lib/utils";
 import { getProject } from "@lib/projects";
 
@@ -24,21 +28,20 @@ const { Content } = await render(post);
 const project = getProject(post.id);
 ---
 
-<PageLayout title={post.data.title} description={post.data.description}>
+<PageLayout title={post.data.title} description={`${post.data.title}, a ${project.name} post by ${SITE.NAME}.`}>
   <Container>
-    <div class="animate text-sm opacity-70">
+    <div class="animate text-sm text-muted-foreground">
       <Link href="/blog" underline={false}>&larr; All posts</Link>
     </div>
 
     <article class="mt-6">
-      <header class="animate not-prose mb-8">
-        <h1 class="text-3xl md:text-4xl font-semibold text-[#353535] dark:text-[#FFFFFF]">
+      <header class="animate mb-8">
+        <h1 class="text-3xl md:text-4xl font-semibold text-foreground">
           {post.data.title}
         </h1>
-        <div class="mt-2 flex items-center gap-2 text-sm">
-          <span class="text-[#3C6E71] dark:text-[#9bbfc1]">{project.name}</span>
-          <span class="opacity-40">&middot;</span>
-          <span class="opacity-70"><FormattedDate date={post.data.date} /></span>
+        <div class="mt-3 flex items-center gap-3 text-sm">
+          <Badge tone="primary-accent" appearance="soft" size="sm">{project.name}</Badge>
+          <span class="text-muted-foreground"><FormattedDate date={post.data.date} /></span>
         </div>
       </header>
 
@@ -47,17 +50,18 @@ const project = getProject(post.id);
           <Image
             src={post.data.cover}
             alt={post.data.coverAlt ?? post.data.title}
-            class="animate mb-8 rounded-lg w-full"
+            class="animate mb-8 rounded-sm w-full"
           />
         )
       }
 
-      <div class="animate">
+      <Prose class="animate">
         <Content />
-      </div>
+      </Prose>
     </article>
 
-    <div class="animate mt-12 text-sm opacity-70">
+    <Separator class="mt-12" />
+    <div class="animate mt-6 text-sm text-muted-foreground">
       <Link href="/blog" underline={false}>&larr; All posts</Link>
     </div>
   </Container>

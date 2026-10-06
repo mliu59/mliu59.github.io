@@ -9,7 +9,6 @@ const blog = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      description: z.string(),
       date: z.coerce.date(),
       // Optional cover image (optimized by Astro). Place it next to index.md
       // and reference it relatively, e.g. cover: ./cover.png

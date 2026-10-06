@@ -81,7 +81,6 @@ Frontmatter:
 ```yaml
 ---
 title: "My first post"
-description: "A short summary."
 date: 2026-06-03
 cover: ./cover.jpg   # optional
 tags: ["astro"]      # optional

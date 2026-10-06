@@ -1,6 +1,5 @@
 ---
 title: "Wikispeedruns: A Retrospective"
-description: "Retrospective on building Wikispeedruns."
 date: 2026-01-10
 tags: ["wikispeedruns", "retrospective"]
 draft: false

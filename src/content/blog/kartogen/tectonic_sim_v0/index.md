@@ -1,6 +1,5 @@
 ---
 title: "Simulating Tectonics - v0"
-description: "Discussion of current status, findings, and learnings"
 date: 2026-06-04
 tags: ["kartogen", "tectonic_sim"]
 ---

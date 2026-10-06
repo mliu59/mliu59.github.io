@@ -1,262 +1,198 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/starwind/carousel";
+import { Button } from "@/components/starwind/button";
+import ChevronLeft from "@tabler/icons/outline/chevron-left.svg";
+import ChevronRight from "@tabler/icons/outline/chevron-right.svg";
 import { projectHref, isExternalHref } from "@lib/utils";
 
-// Ring carousel: three cards visible at once, the middle one in focus and the
-// neighbours scaled down either side. Advancing wraps around, so the ring
-// never hits an end. Clicking a side card brings it to the centre; clicking
-// the centre card follows its link. Rotation pauses while the pointer or
-// keyboard focus is inside, and is disabled for users who prefer reduced
-// motion.
+// Looping project gallery built on the Starwind Carousel (Embla underneath).
+// Three cards are visible at once on desktop with the centred one in focus;
+// the ring wraps around in both directions and auto-advances via Embla's
+// Autoplay plugin (paused on hover, disabled for reduced-motion users).
+//
+// Embla can only loop when the slides overflow the viewport, so with fewer
+// than six projects the list is repeated until there are at least six slides.
+// Dots and the active state map each slide back to its real project index.
 interface Props {
   projects: CollectionEntry<"projects">[];
   intervalMs?: number;
 }
 
 const { projects, intervalMs = 5000 } = Astro.props;
+const n = projects.length;
+const MIN_SLIDES = 6;
+const repeats = n > 0 ? Math.max(1, Math.ceil(MIN_SLIDES / n)) : 0;
+const slides = Array.from({ length: n * repeats }, (_, i) => ({
+  project: projects[i % n],
+  index: i % n,
+}));
 ---
 
-<div class="project-carousel relative" data-interval={intervalMs}>
-  <div
-    class="carousel-track grid overflow-hidden py-2 outline-none"
-    tabindex="0"
-    aria-roledescription="carousel"
+<div class="project-carousel" data-count={n} data-interval={intervalMs}>
+  <Carousel
+    autoInit={false}
+    opts={{ loop: true, align: "center" }}
     aria-label="Featured projects"
   >
-    {
-      projects.map((project, i) => {
-        const href = projectHref(project.id, project.data.link);
-        const external = isExternalHref(href);
-        return (
-          <a
-            href={href}
-            target={external ? "_blank" : "_self"}
-            rel={external ? "noopener noreferrer" : undefined}
-            class="carousel-slide group block w-[70%] justify-self-center md:w-[calc((100%-2rem)/3)]"
-            aria-label={`${project.data.title}: ${project.data.description}`}
-            data-index={i}
-          >
-            <div class="overflow-hidden rounded-lg bg-[#3C6E71]/10 dark:bg-[#FFFFFF]/5">
-              <Image
-                src={project.data.thumbnail}
-                alt={project.data.thumbnailAlt ?? project.data.title}
-                width={640}
-                class="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-              />
-            </div>
-            <div class="mt-3 text-center">
-              <span class="font-semibold text-[#284B63] dark:text-[#FFFFFF]">
-                {project.data.title}
-              </span>
-              <p class="mt-1 text-sm leading-snug opacity-80 line-clamp-2">
-                {project.data.description}
-              </p>
-            </div>
-          </a>
-        );
-      })
-    }
-  </div>
+    <CarouselContent class="-ml-4">
+      {
+        slides.map(({ project, index }) => {
+          const href = projectHref(project.id, project.data.link);
+          const external = isExternalHref(href);
+          return (
+            <CarouselItem class="basis-[72%] pl-4 md:basis-1/3" data-project-index={index}>
+              <a
+                href={href}
+                target={external ? "_blank" : "_self"}
+                rel={external ? "noopener noreferrer" : undefined}
+                class="carousel-card group block transition-[transform,opacity] duration-500 ease-out"
+                aria-label={`${project.data.title}: ${project.data.description}`}
+              >
+                <div class="overflow-hidden rounded-sm bg-muted ring-1 ring-border">
+                  <Image
+                    src={project.data.thumbnail}
+                    alt={project.data.thumbnailAlt ?? project.data.title}
+                    width={640}
+                    class="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div class="mt-3 text-center">
+                  <span class="font-semibold text-primary dark:text-foreground">
+                    {project.data.title}
+                  </span>
+                  <p class="mt-1 text-sm leading-snug text-muted-foreground">
+                    {project.data.description}
+                  </p>
+                </div>
+              </a>
+            </CarouselItem>
+          );
+        })
+      }
+    </CarouselContent>
 
-  {
-    projects.length > 1 && (
-      <div class="mt-2 flex items-center justify-between">
-        <div class="flex gap-2" role="tablist" aria-label="Choose project">
-          {projects.map((project, i) => (
-            <button
-              type="button"
-              class="carousel-dot h-2 w-2 rounded-full bg-current opacity-30 transition-opacity hover:opacity-70"
-              data-index={i}
-              aria-label={`Go to ${project.data.title}`}
-            />
-          ))}
+    {
+      n > 1 && (
+        <div class="mt-3 flex items-center justify-between">
+          <div class="flex gap-2" role="tablist" aria-label="Choose project">
+            {projects.map((project, i) => (
+              <button
+                type="button"
+                class="carousel-dot size-2 rounded-full bg-foreground opacity-30 transition-opacity hover:opacity-70 aria-[current=true]:opacity-100"
+                data-index={i}
+                aria-label={`Go to ${project.data.title}`}
+              />
+            ))}
+          </div>
+          <div class="flex gap-2">
+            <Button variant="outline" size="icon-sm" class="rounded-full" aria-label="Previous project" data-sw-carousel-previous>
+              <ChevronLeft aria-hidden="true" />
+            </Button>
+            <Button variant="outline" size="icon-sm" class="rounded-full" aria-label="Next project" data-sw-carousel-next>
+              <ChevronRight aria-hidden="true" />
+            </Button>
+          </div>
         </div>
-        <div class="flex gap-2">
-          <button
-            type="button"
-            class="carousel-prev rounded-full border border-current/20 px-3 py-1 text-sm transition-colors hover:bg-[#284B63] hover:text-[#FFFFFF] hover:border-[#284B63]"
-            aria-label="Previous project"
-          >
-            &larr;
-          </button>
-          <button
-            type="button"
-            class="carousel-next rounded-full border border-current/20 px-3 py-1 text-sm transition-colors hover:bg-[#284B63] hover:text-[#FFFFFF] hover:border-[#284B63]"
-            aria-label="Next project"
-          >
-            &rarr;
-          </button>
-        </div>
-      </div>
-    )
-  }
+      )
+    }
+  </Carousel>
 </div>
 
 <style>
-  /* Every slide shares one grid cell; JS moves them with transforms so the
-     track is as tall as the tallest card and the ring can wrap seamlessly. */
-  .carousel-slide {
-    grid-area: 1 / 1;
-    transition:
-      transform 500ms ease,
-      opacity 500ms ease;
-    will-change: transform, opacity;
-  }
-  .carousel-slide[data-offset="0"] {
-    z-index: 2;
-  }
-  .carousel-slide[data-offset="-1"],
-  .carousel-slide[data-offset="1"] {
-    z-index: 1;
+  /* Side cards sit back; the selected (centred) card comes forward. */
+  .carousel-card {
+    transform: scale(0.88);
     opacity: 0.55;
   }
-  .carousel-slide[data-offset="-1"]:hover,
-  .carousel-slide[data-offset="1"]:hover {
-    opacity: 0.85;
-  }
-  .carousel-slide[data-offset="hidden"] {
-    opacity: 0;
-    pointer-events: none;
-  }
-  .carousel-slide.no-transition {
-    transition: none;
-  }
-  .carousel-dot[aria-current="true"] {
+  [data-sw-carousel-item][data-active] .carousel-card {
+    transform: scale(1);
     opacity: 1;
   }
   @media (prefers-reduced-motion: reduce) {
-    .carousel-slide {
+    .carousel-card {
       transition: none;
     }
   }
 </style>
 
 <script>
-  const GAP_PX = 16;
-  const SIDE_SCALE = 0.85;
+  import { createCarousel } from "@starwind-ui/runtime/carousel";
+  import type { CarouselInstance } from "@starwind-ui/runtime/carousel";
+  import Autoplay from "embla-carousel-autoplay";
 
-  function setupCarousels() {
-    document
-      .querySelectorAll<HTMLElement>(".project-carousel")
-      .forEach((root) => {
-        if (root.dataset.ready) return;
-        root.dataset.ready = "1";
+  const instances = new Map<HTMLElement, CarouselInstance>();
 
-        const track = root.querySelector<HTMLElement>(".carousel-track");
-        const slides = [...root.querySelectorAll<HTMLElement>(".carousel-slide")];
-        const dots = [...root.querySelectorAll<HTMLButtonElement>(".carousel-dot")];
-        if (!track || slides.length === 0) return;
+  function setupProjectCarousels() {
+    document.querySelectorAll<HTMLElement>(".project-carousel").forEach((root) => {
+      if (instances.has(root)) return;
+      const carouselRoot = root.querySelector<HTMLElement>("[data-sw-carousel]");
+      if (!carouselRoot) return;
 
-        const n = slides.length;
-        const interval = Number(root.dataset.interval) || 5000;
-        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        let current = 0;
-        let timer: number | undefined;
-        let paused = false;
-        const offsets = new Array<number>(n).fill(0);
+      const n = Number(root.dataset.count) || 1;
+      const interval = Number(root.dataset.interval) || 5000;
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const plugins =
+        reduceMotion || n < 2
+          ? []
+          : [Autoplay({ delay: interval, stopOnInteraction: false, stopOnMouseEnter: true })];
 
-        // Signed ring distance from `current` to slide i, in (-n/2, n/2].
-        function ringOffset(i: number) {
-          let d = (i - current) % n;
-          if (d < 0) d += n;
-          if (d > n / 2) d -= n;
-          return d;
-        }
-
-        function layout() {
-          const step = slides[0].offsetWidth + GAP_PX;
-          slides.forEach((slide, i) => {
-            const off = ringOffset(i);
-            const prev = offsets[i];
-            offsets[i] = off;
-            const visible = n <= 3 ? true : Math.abs(off) <= 1;
-            // A slide wrapping from one edge of the ring to the other would
-            // otherwise slide straight through the centre; snap it instead.
-            const wraps = Math.abs(off - prev) > 1;
-            slide.classList.toggle("no-transition", wraps);
-            const scale = off === 0 ? 1 : SIDE_SCALE;
-            slide.style.transform = `translateX(${off * step}px) scale(${scale})`;
-            slide.dataset.offset = visible ? String(off) : "hidden";
-            slide.tabIndex = off === 0 ? 0 : -1;
-            if (wraps) {
-              // Re-enable transitions on the next frame so the snap stays instant.
-              requestAnimationFrame(() =>
-                requestAnimationFrame(() => slide.classList.remove("no-transition"))
-              );
-            }
-          });
-          dots.forEach((dot, i) =>
-            dot.setAttribute("aria-current", String(i === current))
-          );
-        }
-
-        function goTo(index: number) {
-          current = ((index % n) + n) % n;
-          layout();
-        }
-
-        function start() {
-          if (reduceMotion || n < 2) return;
-          stop();
-          timer = window.setInterval(() => {
-            if (!paused && document.visibilityState === "visible") goTo(current + 1);
-          }, interval);
-        }
-
-        function stop() {
-          if (timer !== undefined) window.clearInterval(timer);
-          timer = undefined;
-        }
-
-        // Side cards centre themselves on click; only the centre card navigates.
-        slides.forEach((slide, i) => {
-          slide.addEventListener("click", (e) => {
-            if (offsets[i] !== 0) {
-              e.preventDefault();
-              goTo(i);
-              start();
-            }
-          });
-        });
-
-        root.querySelector(".carousel-prev")?.addEventListener("click", () => { goTo(current - 1); start(); });
-        root.querySelector(".carousel-next")?.addEventListener("click", () => { goTo(current + 1); start(); });
-        dots.forEach((dot) =>
-          dot.addEventListener("click", () => { goTo(Number(dot.dataset.index)); start(); })
-        );
-
-        root.addEventListener("mouseenter", () => { paused = true; });
-        root.addEventListener("mouseleave", () => { paused = false; });
-        root.addEventListener("focusin", () => { paused = true; });
-        root.addEventListener("focusout", () => { paused = false; });
-        track.addEventListener("keydown", (e) => {
-          if (e.key === "ArrowRight") { e.preventDefault(); goTo(current + 1); }
-          if (e.key === "ArrowLeft") { e.preventDefault(); goTo(current - 1); }
-        });
-
-        // Basic swipe support.
-        let touchX: number | null = null;
-        track.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
-        track.addEventListener("touchend", (e) => {
-          if (touchX === null) return;
-          const dx = e.changedTouches[0].clientX - touchX;
-          touchX = null;
-          if (Math.abs(dx) > 40) { goTo(current + (dx < 0 ? 1 : -1)); start(); }
-        });
-
-        window.addEventListener("resize", layout);
-
-        // Lay out once without animating so the first paint is already in place.
-        slides.forEach((s) => s.classList.add("no-transition"));
-        layout();
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => slides.forEach((s) => s.classList.remove("no-transition")))
-        );
-        start();
+      const carousel = createCarousel(carouselRoot, {
+        opts: { loop: true, align: "center" },
+        plugins,
       });
+      instances.set(root, carousel);
+      const api = carousel.api;
+
+      const slides = [...carouselRoot.querySelectorAll<HTMLElement>("[data-sw-carousel-item]")];
+      const dots = [...root.querySelectorAll<HTMLButtonElement>(".carousel-dot")];
+
+      const update = () => {
+        const selected = api.selectedScrollSnap();
+        slides.forEach((slide, i) => slide.toggleAttribute("data-active", i === selected));
+        const active = selected % n;
+        dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === active)));
+      };
+      api.on("select", update);
+      api.on("reInit", update);
+      update();
+
+      // Jump to the copy of a project nearest the current position.
+      const nearestSlideFor = (projectIndex: number) => {
+        const current = api.selectedScrollSnap();
+        let best = projectIndex;
+        let bestDist = Infinity;
+        slides.forEach((_, i) => {
+          if (i % n !== projectIndex) return;
+          const d = Math.abs(i - current);
+          if (d < bestDist) { bestDist = d; best = i; }
+        });
+        return best;
+      };
+
+      dots.forEach((dot) =>
+        dot.addEventListener("click", () => api.scrollTo(nearestSlideFor(Number(dot.dataset.index))))
+      );
+
+      // Side cards centre themselves on click; only the centred card navigates.
+      slides.forEach((slide, i) => {
+        slide.querySelector("a")?.addEventListener("click", (e) => {
+          if (!slide.hasAttribute("data-active")) {
+            e.preventDefault();
+            api.scrollTo(i);
+          }
+        });
+      });
+    });
   }
 
-  setupCarousels();
-  document.addEventListener("astro:after-swap", setupCarousels);
+  function teardownProjectCarousels() {
+    instances.forEach((carousel) => carousel.destroy());
+    instances.clear();
+  }
+
+  setupProjectCarousels();
+  document.addEventListener("astro:before-swap", teardownProjectCarousels);
+  document.addEventListener("astro:after-swap", setupProjectCarousels);
 </script>

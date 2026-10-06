@@ -1,6 +1,7 @@
 ---
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
+import { Button } from "@/components/starwind/button";
 import { SITE } from "@consts";
 ---
 
@@ -12,17 +13,19 @@ import { SITE } from "@consts";
           {SITE.NAME}
         </div>
       </Link>
-      <nav class="flex items-center gap-4 text-sm">
-        <Link href="/" underline={false}>Home</Link>
-        <Link href="/projects" underline={false}>Projects</Link>
-        <Link href="/blog" underline={false}>Blog</Link>
-        <Link
+      <nav class="flex items-center gap-1 text-sm">
+        <Button href="/" variant="ghost" size="sm" class="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">Home</Button>
+        <Button href="/projects" variant="ghost" size="sm" class="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">Projects</Button>
+        <Button href="/blog" variant="ghost" size="sm" class="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">Blog</Button>
+        <Button
           href="/Miles_Liu_2026_Resume.pdf"
-          underline={false}
-          external
+          target="_blank"
+          variant="ghost"
+          size="sm"
+          class="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
           data-goatcounter-click="resume-download"
           data-goatcounter-title="Resume PDF download"
-        >Resume</Link>
+        >Resume</Button>
       </nav>
     </div>
   </Container>
