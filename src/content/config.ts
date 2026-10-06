@@ -47,9 +47,6 @@ const projects = defineCollection({
         .array(z.object({ label: z.string(), href: z.string() }))
         .optional()
         .default([]),
-      // Used for ordering (newest first). A rough "last active" date is fine.
-      date: z.coerce.date(),
-      tags: z.array(z.string()).optional(),
       // Featured projects appear in the homepage carousel.
       featured: z.boolean().optional().default(true),
       draft: z.boolean().optional().default(false),

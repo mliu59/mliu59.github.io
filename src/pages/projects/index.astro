@@ -7,7 +7,7 @@ import { PROJECTS } from "@consts";
 
 const projects = (await getCollection("projects"))
   .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>

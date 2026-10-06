@@ -34,16 +34,5 @@ const external = isExternalHref(href);
     <p class="mt-1 text-sm leading-snug opacity-80">
       {project.data.description}
     </p>
-    {
-      project.data.tags && project.data.tags.length > 0 && (
-        <div class="mt-2 flex flex-wrap gap-1.5">
-          {project.data.tags.map((tag) => (
-            <span class="rounded-full bg-[#3C6E71]/10 px-2 py-0.5 text-xs text-[#284B63] dark:bg-[#FFFFFF]/10 dark:text-[#9bbfc1]">
-              {tag}
-            </span>
-          ))}
-        </div>
-      )
-    }
   </div>
 </a>

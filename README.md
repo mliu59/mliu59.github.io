@@ -29,7 +29,7 @@ to GitHub Pages — see [.github/workflows/deploy.yml](.github/workflows/deploy.
 
 Projects live under `src/content/projects/<project>/index.md`, one folder per
 project with its thumbnail (static image or GIF) alongside. They show up on
-`/projects` and, if `featured`, in the homepage carousel.
+`/projects` and, if `featured`, in the homepage carousel, sorted by title.
 
 ```
 src/content/projects/
@@ -46,8 +46,6 @@ title: "My project"
 description: "One or two sentences for the card."
 thumbnail: ./thumbnail.gif
 thumbnailAlt: "What the thumbnail shows"   # optional
-date: 2026-06-03                           # ordering only, newest first
-tags: ["robotics"]                         # optional
 link: https://github.com/me/my-project     # optional, see below
 links:                                     # optional, shown on the detail page
   - label: "GitHub repo"

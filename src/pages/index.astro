@@ -16,7 +16,7 @@ const latestPosts = (await getCollection("blog"))
 
 const featuredProjects = (await getCollection("projects"))
   .filter((p) => !p.data.draft && p.data.featured)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
   .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 ---
 
