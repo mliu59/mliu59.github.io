@@ -51,6 +51,16 @@ artifacts/<task>/<id>/                 files the work wrote
 
 The GUI is designed to be similar to whiteboarding tools. You can draw nodes and edges on its canvas, inspect and edit the nodes' data content, and it attempts to applies the changes to the taskmap. The GUI also tracks the status of each agent currently working on the active task with highlighted cursors and signed session IDs. Cosmetic edits such as layout, colours, and card sizes are saved alongside the map but are never read by agents.
 
+## Try it
+
+The skill installs into any repo with one command, via the [skills CLI](https://skills.sh/):
+
+```bash
+npx skills add mliu59/agent-taskmap
+```
+
+That puts it where Claude Code and most other harnesses load skills from. The `tm` CLI that the skill drives is a separate `pip install` from the repo, and needs Python 3.11 or newer with no other dependencies.
+
 ## Status
 
 In early development. See the [GitHub repo](https://github.com/mliu59/agent-taskmap) for setup instructions and how to integrate it into your agentic workflows.
