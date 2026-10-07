@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/starwind/carousel";
 import { Button } from "@/components/starwind/button";
+import { Badge } from "@/components/starwind/badge";
 import ChevronLeft from "@tabler/icons/outline/chevron-left.svg";
 import ChevronRight from "@tabler/icons/outline/chevron-right.svg";
 import { projectHref, isExternalHref } from "@lib/utils";
@@ -20,7 +21,7 @@ interface Props {
   intervalMs?: number;
 }
 
-const { projects, intervalMs = 5000 } = Astro.props;
+const { projects, intervalMs = 10000 } = Astro.props;
 const n = projects.length;
 const MIN_SLIDES = 6;
 const repeats = n > 0 ? Math.max(1, Math.ceil(MIN_SLIDES / n)) : 0;
@@ -59,8 +60,9 @@ const slides = Array.from({ length: n * repeats }, (_, i) => ({
                   />
                 </div>
                 <div class="mt-3 text-center">
-                  <span class="font-semibold text-primary dark:text-foreground">
+                  <span class="inline-flex items-center gap-2 font-semibold text-primary dark:text-foreground">
                     {project.data.title}
+                    {project.data.wip && <Badge tone="primary-accent" appearance="outline" size="sm">WIP</Badge>}
                   </span>
                   <p class="mt-1 text-sm leading-snug text-muted-foreground">
                     {project.data.description}
@@ -131,7 +133,7 @@ const slides = Array.from({ length: n * repeats }, (_, i) => ({
       if (!carouselRoot) return;
 
       const n = Number(root.dataset.count) || 1;
-      const interval = Number(root.dataset.interval) || 5000;
+      const interval = Number(root.dataset.interval) || 10000;
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const plugins =
         reduceMotion || n < 2

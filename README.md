@@ -49,6 +49,7 @@ link: https://github.com/me/my-project     # optional, see below
 links:                                     # optional, shown on the detail page
   - label: "GitHub repo"
     href: "https://github.com/me/my-project"
+wip: false                                 # optional, shows a "WIP" badge by the title
 featured: true                             # optional, default true
 draft: false                               # optional
 ---
