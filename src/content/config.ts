@@ -45,6 +45,8 @@ const projects = defineCollection({
         .array(z.object({ label: z.string(), href: z.string() }))
         .optional()
         .default([]),
+      // Work in progress: shows a small "WIP" badge next to the title.
+      wip: z.boolean().optional().default(false),
       // Featured projects appear in the homepage carousel.
       featured: z.boolean().optional().default(true),
       draft: z.boolean().optional().default(false),
