@@ -1,6 +1,5 @@
 ---
 title: "Agent Taskmap"
-wip: true
 description: "A lightweight agent skill that facilitates a shared planning artifact for humans and parallel agent sessions collaborating on long-running dynamic research tasks."
 thumbnail: ./thumbnail.gif
 links:
