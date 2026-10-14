@@ -1,9 +1,9 @@
 ---
 import "../styles/starwind.css";
-import "@fontsource/roboto/latin-400.css";
-import "@fontsource/roboto/latin-600.css";
-import roboto400 from "@fontsource/roboto/files/roboto-latin-400-normal.woff2";
-import roboto600 from "@fontsource/roboto/files/roboto-latin-600-normal.woff2";
+import "@fontsource/ibm-plex-sans/latin-400.css";
+import "@fontsource/ibm-plex-sans/latin-600.css";
+import plexSans400 from "@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2";
+import plexSans600 from "@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2";
 
 import { ClientRouter } from "astro:transitions";
 import { ThemeInitScript } from "@starwind-ui/astro/theme";
@@ -36,8 +36,8 @@ const ogImage = image ? new URL(image, Astro.url).toString() : null;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href={roboto400} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={roboto600} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={plexSans400} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={plexSans600} as="font" type="font/woff2" crossorigin/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
